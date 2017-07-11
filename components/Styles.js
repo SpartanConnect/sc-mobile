@@ -11,11 +11,14 @@ export const AppStyles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   announcement: {
-    backgroundColor: '#dfdfdf',
-    borderRadius: 6,
-    margin: 20,
-    marginTop: 10,
-    marginBottom: 10,
+    backgroundColor: '#ffffff',
+    borderRadius: 0,
+    margin: 0,
+    marginTop: 2,
+    marginBottom: 0,
+    padding: 10
+  },
+  announcementDescription: {
     padding: 10
   },
 });

@@ -10,6 +10,7 @@ import Colors from '../constants/Colors';
 
 import HomeScreen from '../screens/HomeScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+/*import AnnouncementViewScreen from '../screens/Announcement';*/
 
 export default TabNavigator(
   {
@@ -19,6 +20,9 @@ export default TabNavigator(
     Settings: {
       screen: SettingsScreen,
     },
+    /*Announcement: {
+      screen: AnnouncementViewScreen
+    },*/
   },
   {
     navigationOptions: ({ navigation }) => ({

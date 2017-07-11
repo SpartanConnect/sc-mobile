@@ -1,4 +1,10 @@
-export class AnnouncementView extends Component {
+import React, { Component } from 'react';
+import { Alert, Button, FlatList, ScrollView, StatusBar, StyleSheet, Text, View, WebView } from 'react-native';
+import HTMLView from 'react-native-htmlview';
+
+import { AppStyles, AppTextStyles } from '../components/Styles';
+
+export class AnnouncementView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -48,7 +54,7 @@ export class AnnouncementView extends Component {
 }
 
 // Web Screen for Announcement
-export class AnnouncementWebScreen extends Component {
+export class AnnouncementWebScreen extends React.Component {
   static navigationOptions = {
     title: 'Spartan Connect Web App'
   };
@@ -60,7 +66,7 @@ export class AnnouncementWebScreen extends Component {
 }
 
 // The Announcment Screen
-export class AnnouncementViewScreen extends Component {
+export class AnnouncementViewScreen extends React.Component {
   static navigationOptions = {
     title: 'View Announcement'
   };

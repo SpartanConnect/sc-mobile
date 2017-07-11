@@ -3,7 +3,7 @@ Contains the announcment component that holds the information from the server.
 */
 
 import React, { Component } from 'react';
-import { Alert, Button, FlatList, RefreshControl, ScrollView, StatusBar, Text, View, WebView } from 'react-native';
+import { Alert, Button, FlatList, RefreshControl, ScrollView, StatusBar, TouchableOpacity, Text, View, WebView } from 'react-native';
 import HTMLView from 'react-native-htmlview';
 
 
@@ -45,7 +45,9 @@ export class Announcement extends Component {
         this.setState((state) => {
           return {
             name: responseJson.name,
-            description: "<div>"+responseJson.description+"</div>"
+            description: "<div>"+responseJson.description+"</div>",
+            shortDescription: "<div>"+responseJson.description.substring(0,40)+"...</div>",
+            tags: "<div>"+responseJson.tagsString+"</div>"
           };
         });
       });
@@ -56,11 +58,13 @@ export class Announcement extends Component {
 
   render() {
     return (
-      <View style={AppStyles.announcement}>
-        <Text style={AppTextStyles.heading}>{this.state.name}</Text>
-        <HTMLView value={this.state.description}/>
-        <Button title="READ MORE" onPress={() => this.props.returnFunction(this.props.id)} />
-      </View>
+      <TouchableOpacity onPress={() => this.props.returnFunction(this.props.id)} >
+        <View style={AppStyles.announcement} onPress={() => this.props.returnFunction(this.props.id)}>
+          <Text style={AppTextStyles.heading}>{this.state.name}</Text>
+          <HTMLView style={AppStyles.announcementDescription} value={this.state.shortDescription}/>
+          <HTMLView value={this.state.tagsString}/>
+        </View>
+      </TouchableOpacity>
     );
   }
 }
