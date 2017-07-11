@@ -4,7 +4,10 @@ import HTMLView from 'react-native-htmlview';
 
 import { AppStyles, AppTextStyles } from '../components/Styles';
 
-export class AnnouncementView extends React.Component {
+export default class AnnouncementView extends React.Component {
+  static navigationOptions = {
+    title: 'Announcements',
+  };
   constructor(props) {
     super(props);
     this.state = {

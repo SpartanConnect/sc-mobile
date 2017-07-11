@@ -18,9 +18,6 @@ export const AppStyles = StyleSheet.create({
     marginBottom: 0,
     padding: 10
   },
-  announcementDescription: {
-    padding: 10
-  },
 });
 
 export const AppTextStyles = StyleSheet.create({
