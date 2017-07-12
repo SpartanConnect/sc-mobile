@@ -1,7 +1,7 @@
 import { Notifications } from 'expo';
 import React from 'react';
 import { StackNavigator } from 'react-navigation';
-import { Image } from 'react-native';
+import { Image, Text } from 'react-native';
 
 import MainTabNavigator from './MainTabNavigator';
 import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync';
@@ -24,12 +24,12 @@ const RootStackNavigator = StackNavigator(
         fontSize: 22
       },
       headerStyle: {
-        height: 100,
+        height: 80,
         backgroundColor: '#ffffff'
       },
-
       headerLeft: <Image source={require ('../assets/images/logoandtext.png')}
         style={{left: 0, width: 310, height: 80, padding: 0, margin: 0}} />,
+      headerRight: <Text style={{marginTop: 60, marginRight: 4, color:"#FFC91E"}}>{new Date().toDateString()}</Text>,
     }),
   }
 );

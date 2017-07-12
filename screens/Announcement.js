@@ -5,10 +5,6 @@ import HTMLView from 'react-native-htmlview';
 import { AppStyles, AppTextStyles } from '../components/Styles';
 
 export default class AnnouncementView extends React.Component {
-  static navigationOptions = {
-    title: 'Announcements',
-
-  };
   constructor(props) {
     super(props);
     this.state = {
@@ -66,24 +62,5 @@ export class AnnouncementWebScreen extends React.Component {
   render() {
     const { params } = this.props.navigation.state;
     return (<WebView source={{uri: 'http://sctest.x10.mx/view.php?id='+params.id}}/>);
-  }
-}
-
-// The Announcment Screen
-export class AnnouncementViewScreen extends React.Component {
-  static navigationOptions = {
-    title: 'View Announcement'
-  };
-
-  render() {
-    const { navigate } = this.props.navigation;
-    const { params } = this.props.navigation.state;
-    return(
-      <ScrollView style={AppStyles.announcementsView}>
-        <StatusBar hidden />
-        <AnnouncementView id={params.id}/>
-        <Button title="View In Web App" onPress={() => {navigate('AnnouncementWeb', {id: params.id})}} />
-      </ScrollView>
-    );
   }
 }
