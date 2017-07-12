@@ -40,15 +40,14 @@ export default class HomeScreen extends React.Component {
     });
   }
 
-  _onRedirect(announcementId) {
+  _onRedirect(announcementData) {
     const { navigate } = this.props.navigation;
-    navigate('Announcement', {id: announcementId});
+    navigate('Announcement', {data: announcementData});
   }
 
   retrieveCurrentAnnouncements(resolve, reject) {
-    //http://sctest.x10.mx/api/get_current_announcements.php?returnType=ids
     try {
-      fetch('http://sctest.x10.mx/api/get_current_announcements.php?returnType=ids', {
+      fetch('https://apisc.encadyma.com/announcements/', {
         method: 'GET',
         headers: {
           'Accept': 'application/json',
@@ -85,7 +84,7 @@ export default class HomeScreen extends React.Component {
 
         <ScrollView refreshControl={<RefreshControl refreshing={this.state.refreshing} onRefresh={this._onRefresh.bind(this)}/>} style={AppStyles.announcementsView}>
               <StatusBar hidden />
-              <FlatList data={this.state.announcements} renderItem={({item}) => <Announcement id={item.value} returnFunction={this._onRedirect.bind(this)} />}/>
+              <FlatList data={this.state.announcements} renderItem={({item}) => <Announcement id={item.value.id} data={item.value} returnFunction={this._onRedirect.bind(this)} />}/>
         </ScrollView>
 
     );
