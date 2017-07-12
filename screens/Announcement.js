@@ -6,12 +6,12 @@ import { AppStyles, AppTextStyles } from '../components/Styles';
 
 export default class AnnouncementView extends React.Component {
   static navigationOptions = {
-    title: 'Announcements',
+    title: 'Announcement',
   };
   constructor(props) {
     super(props);
     this.state = {
-      name: "Loading Announcement",
+      title: "Loading Announcement",
       description: "Loading Announcement Description"
     };
 
@@ -23,8 +23,10 @@ export default class AnnouncementView extends React.Component {
   }
 
   retrieveContent() {
-    try {
-      fetch('http://sctest.x10.mx/api/get_announcement_by_id.php?announcement_id='+this.props.id, {
+    //console.log(this.props)
+    /*try {
+      console.log(this.props);
+      fetch('https://apisc.encadyma.com/announcements/'+this.props.id, {
         method: 'GET',
         headers: {
           'Accept': 'application/json',
@@ -35,22 +37,28 @@ export default class AnnouncementView extends React.Component {
       }).then((responseJson) => {
         this.setState((state) => {
           return {
-            name: responseJson.name,
+            title: responseJson.title,
             description: "<div>"+responseJson.description+"</div>"
           };
         });
       });
     } catch (error) {
       console.error(error);
+    }*/
+
+    // TODO: Get rid of state
+    return {
+      title: this.props.navigation.state.params.data.title,
+      description: "<div>"+this.props.navigation.state.params.data.description+"</div>"
     }
   }
 
   render() {
     return (
       <View style={AppStyles.announcement}>
-        <Text style={AppTextStyles.heading}>{this.state.name}</Text>
-        <HTMLView value={this.state.description}/>
-        <Text>Posted by Sir Issac the Waltson</Text>
+        <Text style={AppTextStyles.heading}>{this.props.navigation.state.params.data.title}</Text>
+        <HTMLView value={this.props.navigation.state.params.data.description}/>
+        <Text>Posted by {this.props.navigation.state.params.data.creator.name}</Text>
       </View>
     );
   }
@@ -64,7 +72,7 @@ export class AnnouncementWebScreen extends React.Component {
 
   render() {
     const { params } = this.props.navigation.state;
-    return (<WebView source={{uri: 'http://sctest.x10.mx/view.php?id='+params.id}}/>);
+    return (<WebView source={{uri: 'https://apisc.encadyma.com/announcements/current'+params.data.id}}/>);
   }
 }
 
@@ -80,8 +88,8 @@ export class AnnouncementViewScreen extends React.Component {
     return(
       <ScrollView style={AppStyles.announcementsView}>
         <StatusBar hidden />
-        <AnnouncementView id={params.id}/>
-        <Button title="View In Web App" onPress={() => {navigate('AnnouncementWeb', {id: params.id})}} />
+        <AnnouncementView data={this.props.navigation.state.params.data}/>
+        <Button title="View In Web App" onPress={() => {navigate('AnnouncementWeb', {id: params.data.id})}} />
       </ScrollView>
     );
   }
