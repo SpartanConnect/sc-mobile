@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Alert, Button, FlatList, ScrollView, StatusBar, StyleSheet, Text, View, WebView } from 'react-native';
+import { Alert, Button, FlatList, ScrollView, StatusBar, StyleSheet, Text, View, WebView, Image } from 'react-native';
 import HTMLView from 'react-native-htmlview';
 
 import { AppStyles, AppTextStyles } from '../components/Styles';
@@ -8,6 +8,7 @@ export default class AnnouncementView extends React.Component {
   static navigationOptions = {
     title: 'Announcement',
   };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -94,3 +95,4 @@ export class AnnouncementViewScreen extends React.Component {
     );
   }
 }
+

@@ -16,14 +16,19 @@ export const AppStyles = StyleSheet.create({
     margin: 0,
     marginTop: 2,
     marginBottom: 0,
-    padding: 10
+    padding: 20
   },
+  announcementDescription:
+  {
+    marginTop: 7,
+    marginBottom: 7
+  }
 });
 
 export const AppTextStyles = StyleSheet.create({
   heading: {
     fontSize: 24,
-    fontWeight: "500"
+    fontWeight: "700"
   },
   bold: {
     fontWeight: "500"
