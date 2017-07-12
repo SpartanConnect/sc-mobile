@@ -18,7 +18,7 @@ The screen that holds the announcements.
 */
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
-    title: 'Announcements',
+    /*text goes here if you need it*/
   };
 
   constructor(props) {

@@ -5,9 +5,7 @@
   "author": null,
   "main": "node_modules/expo/AppEntry.js",
   "devDependencies": {
-  "react-native-scripts": "0.0.31",
-  "jest-expo": "~1.0.1",
-  "react-test-renderer": "16.0.0-alpha.6"
+    "jest-expo": "~18.0.0"
   },
   "scripts": {
     "start": "react-native-scripts start",
@@ -26,9 +24,5 @@
     "react-navigation": "^1.0.0-beta.11",
     "react-native-htmlview": "^0.9.0",
     "@expo/samples": "~1.0.4"
-
-  },
-  "devDependencies": {
-    "jest-expo": "~18.0.0"
   }
 }
