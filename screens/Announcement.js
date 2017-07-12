@@ -6,7 +6,7 @@ import { AppStyles, AppTextStyles } from '../components/Styles';
 
 export default class AnnouncementView extends React.Component {
   static navigationOptions = {
-    title: 'Announcement',
+
   };
 
   constructor(props) {
@@ -24,28 +24,6 @@ export default class AnnouncementView extends React.Component {
   }
 
   retrieveContent() {
-    //console.log(this.props)
-    /*try {
-      console.log(this.props);
-      fetch('https://apisc.encadyma.com/announcements/'+this.props.id, {
-        method: 'GET',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        }
-      }).then((response) => {
-        return response.json();
-      }).then((responseJson) => {
-        this.setState((state) => {
-          return {
-            title: responseJson.title,
-            description: "<div>"+responseJson.description+"</div>"
-          };
-        });
-      });
-    } catch (error) {
-      console.error(error);
-    }*/
 
     // TODO: Get rid of state
     return {
@@ -57,9 +35,11 @@ export default class AnnouncementView extends React.Component {
   render() {
     return (
       <View style={AppStyles.announcement}>
+        <ScrollView>
         <Text style={AppTextStyles.heading}>{this.props.navigation.state.params.data.title}</Text>
-        <HTMLView value={this.props.navigation.state.params.data.description}/>
-        <Text>Posted by {this.props.navigation.state.params.data.creator.name}</Text>
+        <Text style={AppStyles.announcementDescription}>Posted by {this.props.navigation.state.params.data.creator.name}</Text>
+        <Text style={AppStyles.announcementCoreText} > {this.props.navigation.state.params.data.description} </Text>
+        </ScrollView>
       </View>
     );
   }
@@ -77,7 +57,9 @@ export class AnnouncementWebScreen extends React.Component {
   }
 }
 
-// The Announcment Screen
+/*
+The screen that loads in when the announcement is clicked on homescreen.
+*/
 export class AnnouncementViewScreen extends React.Component {
   static navigationOptions = {
     title: 'View Announcement'
@@ -95,4 +77,3 @@ export class AnnouncementViewScreen extends React.Component {
     );
   }
 }
-

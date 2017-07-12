@@ -1,6 +1,6 @@
 /*
 HomeScreen is the main page of the app where users can view the announcements.
-This file contains the actual screen component used to display the announcements
+This file contains the actual screen component used to display the announcement.
 
 */
 
@@ -24,6 +24,7 @@ export default class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      // the announcements array holds all the announcement object.
       announcements: [],
       refreshing: true
     };
@@ -83,7 +84,9 @@ export default class HomeScreen extends React.Component {
     return (
 
         <ScrollView refreshControl={<RefreshControl refreshing={this.state.refreshing} onRefresh={this._onRefresh.bind(this)}/>} style={AppStyles.announcementsView}>
-              <StatusBar hidden />
+              <StatusBar  />
+
+              // Loads in a list of all the announcements.
               <FlatList data={this.state.announcements} renderItem={({item}) => <Announcement id={item.value.id} data={item.value} returnFunction={this._onRedirect.bind(this)} />}/>
         </ScrollView>
 

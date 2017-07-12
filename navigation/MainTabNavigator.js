@@ -11,6 +11,9 @@ import Colors from '../constants/Colors';
 import HomeScreen from '../screens/HomeScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 
+/*
+Handles the tab navigation system.
+*/
 export default TabNavigator(
   {
     Home: {

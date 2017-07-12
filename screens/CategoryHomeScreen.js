@@ -5,6 +5,10 @@ import HTMLView from 'react-native-htmlview';
 import { AppStyles, AppTextStyles } from '../components/Styles';
 import { Announcement } from '../components/UI';
 
+/*
+Thing Kamyar is working on. Not actually used in current working build.
+*/
+
 class CategoryHomeScreen extends React.Component{
   render(){
   return(

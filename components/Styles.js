@@ -20,9 +20,28 @@ export const AppStyles = StyleSheet.create({
   },
   announcementDescription:
   {
-    marginTop: 7,
-    marginBottom: 7
-  }
+    marginTop: 10,
+    marginBottom: 5,
+  },
+  announcementCoreText:
+  {
+    marginTop: 10,
+    marginBottom: 5,
+    fontSize: 18,
+    lineHeight: 30,
+  },
+  pageTitle:
+  {
+    fontSize: 24,
+    fontWeight: "700",
+    textAlign: 'center',
+    padding: 10
+  },
+  date:
+  {
+    marginTop: 60, marginRight: 4, color:"#8c8b8a"
+  },
+
 });
 
 export const AppTextStyles = StyleSheet.create({

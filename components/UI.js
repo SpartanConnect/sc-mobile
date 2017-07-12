@@ -33,28 +33,6 @@ export class Announcement extends Component {
   }
 
   retrieveContent() {
-    /*try {
-      fetch('https://apisc.encadyma.com/announcements/'+this.props.id, {
-        method: 'GET',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        }
-      }).then((responsef) => {
-        return response.json();
-      }).then((responseJson) => {
-        this.setState((state) => {
-          return {
-            title: responseJson.title,
-            description: "<div>"+responseJson.description+"</div>",
-            shortDescription: "<div>"+responseJson.description.substring(0,40)+"...</div>",
-            tags: "<div>"+responseJson.tags+"</div>"
-          };
-        });
-      });
-    } catch (error) {
-      console.error(error);
-    }*/
     this.setState((state) => {
       //console.log(this.props.data);
       return {
@@ -70,7 +48,7 @@ export class Announcement extends Component {
       <TouchableOpacity onPress={() => this.props.returnFunction(this.props.data)} >
         <View style={AppStyles.announcement} onPress={() => this.props.returnFunction(this.props.data)}>
           <Text style={AppTextStyles.heading}>{this.state.title}</Text>
-          <HTMLView value={this.state.shortDescription}/>
+          <HTMLView style={AppStyles.announcementDescription} value={this.state.shortDescription}/>
         </View>
       </TouchableOpacity>
     );
