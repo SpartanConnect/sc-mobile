@@ -1,13 +1,13 @@
 /*
 HomeScreen is the main page of the app where users can view the announcements.
-This file contains the actual screen component used to display the announcements
+This file contains the actual screen component used to display the announcement.
 
 */
 
 import React, { Component } from 'react';
 import { Alert, Button, FlatList, RefreshControl, ScrollView, StyleSheet, StatusBar, Text, View, WebView, TouchableHighlight, I18nManager, Switch, TextInput, DrawerLayoutAndroid, DrawerConsts} from 'react-native';
 import HTMLView from 'react-native-htmlview';
-
+//import Swiper from 'react-native-swiper';
 import { AppStyles, AppTextStyles } from '../components/Styles';
 import { Announcement } from '../components/UI';
 
@@ -24,6 +24,7 @@ export default class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      // the announcements array holds all the announcement object.
       announcements: [],
       refreshing: true
     };
@@ -40,15 +41,14 @@ export default class HomeScreen extends React.Component {
     });
   }
 
-  _onRedirect(announcementId) {
+  _onRedirect(announcementData) {
     const { navigate } = this.props.navigation;
-    navigate('Announcement', {id: announcementId});
+    navigate('Announcement', {data: announcementData});
   }
 
   retrieveCurrentAnnouncements(resolve, reject) {
-    //http://sctest.x10.mx/api/get_current_announcements.php?returnType=ids
     try {
-      fetch('http://sctest.x10.mx/api/get_current_announcements.php?returnType=ids', {
+      fetch('https://apisc.encadyma.com/announcements/', {
         method: 'GET',
         headers: {
           'Accept': 'application/json',
@@ -84,8 +84,10 @@ export default class HomeScreen extends React.Component {
     return (
 
         <ScrollView refreshControl={<RefreshControl refreshing={this.state.refreshing} onRefresh={this._onRefresh.bind(this)}/>} style={AppStyles.announcementsView}>
-              <StatusBar hidden />
-              <FlatList data={this.state.announcements} renderItem={({item}) => <Announcement id={item.value} returnFunction={this._onRedirect.bind(this)} />}/>
+              <StatusBar  />
+
+              // Loads in a list of all the announcements.
+              <FlatList data={this.state.announcements} renderItem={({item}) => <Announcement id={item.value.id} data={item.value} returnFunction={this._onRedirect.bind(this)} />}/>
         </ScrollView>
 
     );

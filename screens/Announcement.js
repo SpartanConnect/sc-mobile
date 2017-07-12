@@ -6,13 +6,13 @@ import { AppStyles, AppTextStyles } from '../components/Styles';
 
 export default class AnnouncementView extends React.Component {
   static navigationOptions = {
-    title: 'Announcements',
 
   };
+
   constructor(props) {
     super(props);
     this.state = {
-      name: "Loading Announcement",
+      title: "Loading Announcement",
       description: "Loading Announcement Description"
     };
 
@@ -24,34 +24,22 @@ export default class AnnouncementView extends React.Component {
   }
 
   retrieveContent() {
-    try {
-      fetch('http://sctest.x10.mx/api/get_announcement_by_id.php?announcement_id='+this.props.id, {
-        method: 'GET',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        }
-      }).then((response) => {
-        return response.json();
-      }).then((responseJson) => {
-        this.setState((state) => {
-          return {
-            name: responseJson.name,
-            description: "<div>"+responseJson.description+"</div>"
-          };
-        });
-      });
-    } catch (error) {
-      console.error(error);
+
+    // TODO: Get rid of state
+    return {
+      title: this.props.navigation.state.params.data.title,
+      description: "<div>"+this.props.navigation.state.params.data.description+"</div>"
     }
   }
 
   render() {
     return (
       <View style={AppStyles.announcement}>
-        <Text style={AppTextStyles.heading}>{this.state.name}</Text>
-        <HTMLView value={this.state.description}/>
-        <Text>Posted by Sir Issac the Waltson</Text>
+        <ScrollView>
+        <Text style={AppTextStyles.heading}>{this.props.navigation.state.params.data.title}</Text>
+        <Text style={AppStyles.announcementDescription}>Posted by {this.props.navigation.state.params.data.creator.name}</Text>
+        <Text style={AppStyles.announcementCoreText} > {this.props.navigation.state.params.data.description} </Text>
+        </ScrollView>
       </View>
     );
   }
@@ -65,11 +53,13 @@ export class AnnouncementWebScreen extends React.Component {
 
   render() {
     const { params } = this.props.navigation.state;
-    return (<WebView source={{uri: 'http://sctest.x10.mx/view.php?id='+params.id}}/>);
+    return (<WebView source={{uri: 'https://apisc.encadyma.com/announcements/current'+params.data.id}}/>);
   }
 }
 
-// The Announcment Screen
+/*
+The screen that loads in when the announcement is clicked on homescreen.
+*/
 export class AnnouncementViewScreen extends React.Component {
   static navigationOptions = {
     title: 'View Announcement'
@@ -81,8 +71,8 @@ export class AnnouncementViewScreen extends React.Component {
     return(
       <ScrollView style={AppStyles.announcementsView}>
         <StatusBar hidden />
-        <AnnouncementView id={params.id}/>
-        <Button title="View In Web App" onPress={() => {navigate('AnnouncementWeb', {id: params.id})}} />
+        <AnnouncementView data={this.props.navigation.state.params.data}/>
+        <Button title="View In Web App" onPress={() => {navigate('AnnouncementWeb', {id: params.data.id})}} />
       </ScrollView>
     );
   }
