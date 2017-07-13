@@ -28,7 +28,8 @@ export default class AnnouncementView extends React.Component {
     // TODO: Get rid of state
     return {
       title: this.props.navigation.state.params.data.title,
-      description: "<div>"+this.props.navigation.state.params.data.description+"</div>"
+      description: "<div>"+this.props.navigation.state.params.data.description+"</div>",
+      tags: this.props.navigation.state.params.data.tags.id,
     }
   }
 
@@ -38,7 +39,8 @@ export default class AnnouncementView extends React.Component {
         <ScrollView>
         <Text style={AppTextStyles.heading}>{this.props.navigation.state.params.data.title}</Text>
         <Text style={AppStyles.announcementDescription}>Posted by {this.props.navigation.state.params.data.creator.name}</Text>
-        <Text style={AppStyles.announcementCoreText} > {this.props.navigation.state.params.data.description} </Text>
+        <Text style={AppStyles.announcementCoreText}>{this.props.navigation.state.params.data.description}</Text>
+        <Text style={AppStyles.announcementDescription}>{this.props.navigation.state.params.data.tags.map(tag => {return tag.name + " ";})}</Text>
         </ScrollView>
       </View>
     );
