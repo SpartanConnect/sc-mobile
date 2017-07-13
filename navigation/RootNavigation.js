@@ -29,7 +29,7 @@ const RootStackNavigator = StackNavigator(
         fontSize: 22
       },
       headerStyle: {
-        height: 100,
+        height: 80,
         backgroundColor: '#ffffff',
         shadowColor: '#8c8b8a',
         shadowOffset: {height:2},

@@ -48,7 +48,7 @@ export default class HomeScreen extends React.Component {
 
   retrieveCurrentAnnouncements(resolve, reject) {
     try {
-      fetch('https://apisc.encadyma.com/announcements/', {
+      fetch('https://apisc.encadyma.com/announcements/current', {
         method: 'GET',
         headers: {
           'Accept': 'application/json',
@@ -76,18 +76,16 @@ export default class HomeScreen extends React.Component {
     }
   }
 
-
   render() {
 
      const { navigate } = this.props.navigation;
 
+     // Loads in a list of all the announcements.
     return (
 
         <ScrollView refreshControl={<RefreshControl refreshing={this.state.refreshing} onRefresh={this._onRefresh.bind(this)}/>} style={AppStyles.announcementsView}>
               <StatusBar  />
-
-              // Loads in a list of all the announcements.
-              <FlatList data={this.state.announcements} renderItem={({item}) => <Announcement id={item.value.id} data={item.value} returnFunction={this._onRedirect.bind(this)} />}/>
+                <FlatList data={this.state.announcements} renderItem={({item}) => <Announcement id={item.value.id} data={item.value} returnFunction={this._onRedirect.bind(this)} />}/>
         </ScrollView>
 
     );
