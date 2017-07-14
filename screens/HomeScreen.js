@@ -153,6 +153,14 @@ export default class HomeScreen extends React.Component {
       console.error(error);
     }
   }
+  v
+  conditionalRender(condition, content) {
+   if (condition) {
+       return content;
+   } else {
+       return null;
+   }
+ }
 
   render() {
 
@@ -161,21 +169,47 @@ export default class HomeScreen extends React.Component {
      // Loads in a list of all the announcements.
     return (
 
-        <ScrollView refreshControl={<RefreshControl refreshing={this.state.refreshing} onRefresh={this._onRefresh.bind(this)}/>} style={AppStyles.announcementsView}>
-              <StatusBar/>
-              {renderIf(this.state.categoryAnnouncements.urgent.length) (<div><Text style= {AppStyles.urgent}>Urgent</Text> <FlatList data={this.state.categoryAnnouncements.urgent} renderItem={({item}) => <Announcement id={item.value.id} data={item.value} returnFunction={this._onRedirect.bind(this)} />}/></div>)}
+      <ScrollView refreshControl={<RefreshControl refreshing={this.state.refreshing} onRefresh={this._onRefresh.bind(this)}/>} style={AppStyles.announcementsView}>
+           <StatusBar/>
 
-              {renderIf(this.state.categoryAnnouncements.general.length)(<div><Text style= {AppStyles.general}>General</Text> <FlatList data={this.state.categoryAnnouncements.general} renderItem={({item}) => <Announcement id={item.value.id} data={item.value} returnFunction={this._onRedirect.bind(this)} />}/></div>)}
+             {this.conditionalRender(this.state.categoryAnnouncements.urgent.length!=0,
+             <View>
+               <Text style= {AppStyles.urgent}>Urgent</Text>
+               <FlatList data={this.state.categoryAnnouncements.urgent} renderItem={({item}) => <Announcement id={item.value.id} data={item.value} returnFunction={this._onRedirect.bind(this)} />}/>
+             </View>)}
 
-              {renderIf(this.state.categoryAnnouncements.asb.length)(<div><Text style= {AppStyles.asb}>ASB</Text> <FlatList data={this.state.categoryAnnouncements.asb} renderItem={({item}) => <Announcement id={item.value.id} data={item.value} returnFunction={this._onRedirect.bind(this)} />}/></div>)}
 
-              {renderIf(this.state.categoryAnnouncements.academics.length)(<div><Text style= {AppStyles.academics}>Academics</Text><FlatList data={this.state.categoryAnnouncements.academics} renderItem={({item}) => <Announcement id={item.value.id} data={item.value} returnFunction={this._onRedirect.bind(this)} />}/></div>)}
+           {this.conditionalRender(this.state.categoryAnnouncements.general.length!=0,
+             <View>
+             <Text style= {AppStyles.general}>General</Text>
+             <FlatList data={this.state.categoryAnnouncements.general} renderItem={({item}) => <Announcement id={item.value.id} data={item.value} returnFunction={this._onRedirect.bind(this)} />}/>
+             </View>)
+           }
 
-              {renderIf(this.state.categoryAnnouncements.clubs.length)(<div><Text style= {AppStyles.clubs}>Clubs</Text><FlatList data={this.state.categoryAnnouncements.clubs} renderItem={({item}) => <Announcement id={item.value.id} data={item.value} returnFunction={this._onRedirect.bind(this)} />}/></div>)}
+           {this.conditionalRender(this.state.categoryAnnouncements.asb.length,
+             <View>
+               <Text style= {AppStyles.asb}>ASB</Text>
+               <FlatList data={this.state.categoryAnnouncements.asb} renderItem={({item}) => <Announcement id={item.value.id} data={item.value} returnFunction={this._onRedirect.bind(this)} />}/>
+             </View>)}
 
-              {renderIf(this.state.categoryAnnouncements.sports.length)(<div><Text style= {AppStyles.sports}>Sports</Text><FlatList data={this.state.categoryAnnouncements.sports} renderItem={({item}) => <Announcement id={item.value.id} data={item.value} returnFunction={this._onRedirect.bind(this)} />}/></div>)}
+           {this.conditionalRender(this.state.categoryAnnouncements.academics.length,
+             <View>
+              <Text style= {AppStyles.academics}>Academics</Text>
+              <FlatList data={this.state.categoryAnnouncements.academics} renderItem={({item}) => <Announcement id={item.value.id} data={item.value} returnFunction={this._onRedirect.bind(this)} />}/>
+            </View>)}
 
-        </ScrollView>
+           {this.conditionalRender(this.state.categoryAnnouncements.clubs.length,
+             <View>
+              <Text style= {AppStyles.clubs}>Clubs</Text>
+              <FlatList data={this.state.categoryAnnouncements.clubs} renderItem={({item}) => <Announcement id={item.value.id} data={item.value} returnFunction={this._onRedirect.bind(this)} />}/>
+            </View>)}
+
+           {this.conditionalRender(this.state.categoryAnnouncements.sports.length,
+             <View>
+              <Text style= {AppStyles.sports}>Sports</Text>
+              <FlatList data={this.state.categoryAnnouncements.sports} renderItem={({item}) => <Announcement id={item.value.id} data={item.value} returnFunction={this._onRedirect.bind(this)} />}/>
+              </View>)}
+     </ScrollView>
 
     );
   }
