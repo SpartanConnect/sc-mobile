@@ -42,6 +42,12 @@ export default class HomeScreen extends React.Component {
     new Promise(this.retrieveCurrentAnnouncements.bind(this)).then(() => {
       this.setState({refreshing: false});
     });
+
+    // Refreshes when app starts.
+    new Promise(this.retrieveCurrentAnnouncements.bind(this)).then(() => {
+      this.setState({refreshing: false});
+      this.forceUpdate();
+    })
   }
 
   _onRefresh() {
@@ -153,7 +159,6 @@ export default class HomeScreen extends React.Component {
       console.error(error);
     }
   }
-  v
   conditionalRender(condition, content) {
    if (condition) {
        return content;
@@ -209,6 +214,7 @@ export default class HomeScreen extends React.Component {
               <Text style= {AppStyles.sports}>Sports</Text>
               <FlatList data={this.state.categoryAnnouncements.sports} renderItem={({item}) => <Announcement id={item.value.id} data={item.value} returnFunction={this._onRedirect.bind(this)} />}/>
               </View>)}
+
      </ScrollView>
 
     );
