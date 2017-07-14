@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "sc-mobile",
-    "description": "This is a test description",
+    "name": "Spartan Connect",
+    "description": "Spartan Connect is a mobile app for LCHS students to read announcements.",
     "slug": "sc-mobile",
     "privacy": "public",
     "sdkVersion": "18.0.0",
-    "version": "1.0.0",
+    "version": "0.14",
     "orientation": "portrait",
     "primaryColor": "#cccccc",
     "icon": "./assets/icons/app-icon.png",
@@ -21,7 +21,11 @@
       "assetExts": ["ttf"]
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.spartanconnect.SpartanConnect"
+    },
+    "android": {
+      "package": "com.spartanconnect.SpartanConnect"
     }
   }
 }
