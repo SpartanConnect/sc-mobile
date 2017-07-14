@@ -7,6 +7,8 @@ This file contains the actual screen component used to display the announcement.
 import React, { Component } from 'react';
 import { Alert, Button, FlatList, RefreshControl, ScrollView, StyleSheet, StatusBar, Text, View, WebView, TouchableHighlight, I18nManager, Switch, TextInput, DrawerLayoutAndroid, DrawerConsts} from 'react-native';
 import HTMLView from 'react-native-htmlview';
+import renderIf from 'render-if';
+
 //import Swiper from 'react-native-swiper';
 import { AppStyles, AppTextStyles } from '../components/Styles';
 import { Announcement } from '../components/UI';
@@ -161,23 +163,17 @@ export default class HomeScreen extends React.Component {
 
         <ScrollView refreshControl={<RefreshControl refreshing={this.state.refreshing} onRefresh={this._onRefresh.bind(this)}/>} style={AppStyles.announcementsView}>
               <StatusBar/>
-              <Text style= {AppStyles.urgent}>Urgent</Text>
-              <FlatList data={this.state.categoryAnnouncements.urgent} renderItem={({item}) => <Announcement id={item.value.id} data={item.value} returnFunction={this._onRedirect.bind(this)} />}/>
+              {renderIf(this.state.categoryAnnouncements.urgent.length) (<div><Text style= {AppStyles.urgent}>Urgent</Text> <FlatList data={this.state.categoryAnnouncements.urgent} renderItem={({item}) => <Announcement id={item.value.id} data={item.value} returnFunction={this._onRedirect.bind(this)} />}/></div>)}
 
-              <Text style= {AppStyles.general}>General</Text>
-              <FlatList data={this.state.categoryAnnouncements.general} renderItem={({item}) => <Announcement id={item.value.id} data={item.value} returnFunction={this._onRedirect.bind(this)} />}/>
+              {renderIf(this.state.categoryAnnouncements.general.length)(<div><Text style= {AppStyles.general}>General</Text> <FlatList data={this.state.categoryAnnouncements.general} renderItem={({item}) => <Announcement id={item.value.id} data={item.value} returnFunction={this._onRedirect.bind(this)} />}/></div>)}
 
-              <Text style= {AppStyles.asb}>ASB</Text>
-              <FlatList data={this.state.categoryAnnouncements.asb} renderItem={({item}) => <Announcement id={item.value.id} data={item.value} returnFunction={this._onRedirect.bind(this)} />}/>
+              {renderIf(this.state.categoryAnnouncements.asb.length)(<div><Text style= {AppStyles.asb}>ASB</Text> <FlatList data={this.state.categoryAnnouncements.asb} renderItem={({item}) => <Announcement id={item.value.id} data={item.value} returnFunction={this._onRedirect.bind(this)} />}/></div>)}
 
-              <Text style= {AppStyles.academics}>Academics</Text>
-              <FlatList data={this.state.categoryAnnouncements.academics} renderItem={({item}) => <Announcement id={item.value.id} data={item.value} returnFunction={this._onRedirect.bind(this)} />}/>
+              {renderIf(this.state.categoryAnnouncements.academics.length)(<div><Text style= {AppStyles.academics}>Academics</Text><FlatList data={this.state.categoryAnnouncements.academics} renderItem={({item}) => <Announcement id={item.value.id} data={item.value} returnFunction={this._onRedirect.bind(this)} />}/></div>)}
 
-              <Text style= {AppStyles.clubs}>Clubs</Text>
-              <FlatList data={this.state.categoryAnnouncements.clubs} renderItem={({item}) => <Announcement id={item.value.id} data={item.value} returnFunction={this._onRedirect.bind(this)} />}/>
+              {renderIf(this.state.categoryAnnouncements.clubs.length)(<div><Text style= {AppStyles.clubs}>Clubs</Text><FlatList data={this.state.categoryAnnouncements.clubs} renderItem={({item}) => <Announcement id={item.value.id} data={item.value} returnFunction={this._onRedirect.bind(this)} />}/></div>)}
 
-              <Text style= {AppStyles.sports}>Sports</Text>
-              <FlatList data={this.state.categoryAnnouncements.sports} renderItem={({item}) => <Announcement id={item.value.id} data={item.value} returnFunction={this._onRedirect.bind(this)} />}/>
+              {renderIf(this.state.categoryAnnouncements.sports.length)(<div><Text style= {AppStyles.sports}>Sports</Text><FlatList data={this.state.categoryAnnouncements.sports} renderItem={({item}) => <Announcement id={item.value.id} data={item.value} returnFunction={this._onRedirect.bind(this)} />}/></div>)}
 
         </ScrollView>
 
