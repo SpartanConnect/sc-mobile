@@ -10,13 +10,18 @@ export const AppStyles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
   },
+  announcementsView: {
+    backgroundColor: '#fff'
+  },
   announcement: {
     backgroundColor: '#ffffff',
     borderRadius: 0,
     margin: 0,
     marginTop: 2,
     marginBottom: 0,
-    padding: 20
+    padding: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: '#bfbfbf'
   },
   announcementDescription:
   {
@@ -37,6 +42,56 @@ export const AppStyles = StyleSheet.create({
     textAlign: 'center',
     padding: 10
   },
+  urgent:
+  {
+    fontSize: 35,
+    fontWeight: "800",
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingLeft: 10,
+    color: '#B0202F',
+    backgroundColor: '#fff'
+  },
+  clubs:
+  {
+    fontSize: 35,
+    fontWeight: "800",
+    marginTop: 10,
+      marginLeft: 10,
+    color: '#B0202F'
+  },
+  sports:
+  {
+    fontSize: 35,
+    fontWeight: "800",
+    marginTop: 10,
+      marginLeft: 10,
+    color: '#B0202F'
+  },
+  asb:
+  {
+    fontSize: 35,
+    fontWeight: "800",
+    marginTop: 10,
+      marginLeft: 10,
+    color: '#B0202F'
+  },
+  general:
+  {
+    fontSize: 35,
+    fontWeight: "800",
+    marginTop: 10,
+      marginLeft: 10,
+    color: '#B0202F'
+  },
+  academics:
+  {
+    fontSize: 35,
+    fontWeight: "800",
+    marginTop: 10,
+      marginLeft: 10,
+    color: '#B0202F'
+  },
   date:
   {
     marginTop: 60, marginRight: 4, color:"#8c8b8a"
@@ -52,4 +107,8 @@ export const AppTextStyles = StyleSheet.create({
   bold: {
     fontWeight: "500"
   }
+});
+
+export const CategoryStyles = StyleSheet.create({
+
 });

@@ -10,8 +10,7 @@ import HTMLView from 'react-native-htmlview';
 //import Swiper from 'react-native-swiper';
 import { AppStyles, AppTextStyles } from '../components/Styles';
 import { Announcement } from '../components/UI';
-
-
+import { API_CALL } from '../constants/APICalls';
 
 /*
 The screen that holds the announcements.
@@ -26,7 +25,17 @@ export default class HomeScreen extends React.Component {
     this.state = {
       // the announcements array holds all the announcement object.
       announcements: [],
-      refreshing: true
+      refreshing: true,
+      categoryAnnouncements: {
+        asb: [],
+        academics: [],
+        general: [],
+        counseling: [],
+        clubs: [],
+        sports: [],
+        urgent: []
+      },
+      categories: []
     };
     new Promise(this.retrieveCurrentAnnouncements.bind(this)).then(() => {
       this.setState({refreshing: false});
@@ -48,7 +57,28 @@ export default class HomeScreen extends React.Component {
 
   retrieveCurrentAnnouncements(resolve, reject) {
     try {
-      fetch('https://apisc.encadyma.com/announcements/current', {
+      // retrieves categories
+      let categories = fetch(API_CALL+'tags/?parentId=0&visibility=1', {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        }
+      }).then((response) => {
+        return response.json();
+      }).then((categoriesJson) => {
+        this.setState((state) => {
+          return {
+            categories: categoriesJson.map((category) => {
+              return {key: category.id, value: category}
+            })
+          };
+        });
+        resolve(categoriesJson);
+        return categoriesJson;
+      });
+
+      let currents = fetch(API_CALL+'announcements/current', {
         method: 'GET',
         headers: {
           'Accept': 'application/json',
@@ -57,6 +87,7 @@ export default class HomeScreen extends React.Component {
       }).then((response) => {
         return response.json();
       }).then((responseJson) => {
+        // Getting a massive list of announcements -- but not filtered!
         var index = 0;
         var keyArray = responseJson.map((result) => {
           index = index + 1;
@@ -67,9 +98,54 @@ export default class HomeScreen extends React.Component {
             announcements: keyArray
           };
         });
-      }).then(() => {
+        resolve(responseJson);
+        return responseJson;
+      }).catch((error) => {
+        console.error(error);
+      });
+
+
+      // Waits for categories and announcements to be retrieved
+      Promise.all([categories, currents]).then((aggregateData) => {
+        //console.log(aggregateData[1]);
+        let filteredAnnouncements = {};
+        // fetch assoc
+        aggregateData[0].map((category) => {
+          filteredAnnouncements[category.slug] = [];
+        });
+
+        // loop through each announcement
+        // and fill up filteredAnnouncements
+        aggregateData[1].map((announcement) => {
+          // Map through each announcement
+          // It's not guaranteed that each announcement will have
+          // only one category, so this is done.
+          announcement.tags.map((tag) => {
+            if (tag.parentId === null) {
+              // push the announcement in the appropriate category
+              filteredAnnouncements[tag.slug].push({key: announcement.id, value: announcement});
+            } else {
+              // this is the code that runs when it isn't a category.
+              // It's blank.
+            }
+          });
+        });
+
+        return filteredAnnouncements;
+        /*this.setState((state) => {
+          return {
+            categoryAnnouncements: filteredAnnouncements
+          };
+        });*/
+      }).then((data) => {
+        this.setState((state) => {
+          return {
+            categoryAnnouncements: data
+          };
+        })
         resolve(true);
       });
+
     } catch (error) {
       resolve(false);
       console.error(error);
@@ -84,12 +160,30 @@ export default class HomeScreen extends React.Component {
     return (
 
         <ScrollView refreshControl={<RefreshControl refreshing={this.state.refreshing} onRefresh={this._onRefresh.bind(this)}/>} style={AppStyles.announcementsView}>
-              <StatusBar  />
-                <FlatList data={this.state.announcements} renderItem={({item}) => <Announcement id={item.value.id} data={item.value} returnFunction={this._onRedirect.bind(this)} />}/>
+              <StatusBar/>
+              <Text style= {AppStyles.urgent}>Urgent</Text>
+              <FlatList data={this.state.categoryAnnouncements.urgent} renderItem={({item}) => <Announcement id={item.value.id} data={item.value} returnFunction={this._onRedirect.bind(this)} />}/>
+
+              <Text style= {AppStyles.general}>General</Text>
+              <FlatList data={this.state.categoryAnnouncements.general} renderItem={({item}) => <Announcement id={item.value.id} data={item.value} returnFunction={this._onRedirect.bind(this)} />}/>
+
+              <Text style= {AppStyles.asb}>ASB</Text>
+              <FlatList data={this.state.categoryAnnouncements.asb} renderItem={({item}) => <Announcement id={item.value.id} data={item.value} returnFunction={this._onRedirect.bind(this)} />}/>
+
+              <Text style= {AppStyles.academics}>Academics</Text>
+              <FlatList data={this.state.categoryAnnouncements.academics} renderItem={({item}) => <Announcement id={item.value.id} data={item.value} returnFunction={this._onRedirect.bind(this)} />}/>
+
+              <Text style= {AppStyles.clubs}>Clubs</Text>
+              <FlatList data={this.state.categoryAnnouncements.clubs} renderItem={({item}) => <Announcement id={item.value.id} data={item.value} returnFunction={this._onRedirect.bind(this)} />}/>
+
+              <Text style= {AppStyles.sports}>Sports</Text>
+              <FlatList data={this.state.categoryAnnouncements.sports} renderItem={({item}) => <Announcement id={item.value.id} data={item.value} returnFunction={this._onRedirect.bind(this)} />}/>
+
         </ScrollView>
 
     );
   }
+
 }
 
 const styles = StyleSheet.create({
