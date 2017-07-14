@@ -49,54 +49,63 @@ export const AppStyles = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 10,
     paddingLeft: 10,
-    color: '#B0202F',
-    backgroundColor: '#fff'
+    color: '#fff',
+    backgroundColor: '#ff3f49'
   },
   clubs:
   {
     fontSize: 35,
     fontWeight: "800",
-    marginTop: 10,
-      marginLeft: 10,
-    color: '#B0202F'
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingLeft: 10,
+    color: '#fff',
+    backgroundColor: '#38c5fc'
   },
   sports:
   {
     fontSize: 35,
     fontWeight: "800",
-    marginTop: 10,
-      marginLeft: 10,
-    color: '#B0202F'
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingLeft: 10,
+    color: '#fff',
+    backgroundColor: '#09db03'
   },
   asb:
   {
     fontSize: 35,
     fontWeight: "800",
-    marginTop: 10,
-      marginLeft: 10,
-    color: '#B0202F'
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingLeft: 10,
+    color: '#fff',
+    backgroundColor: '#fca71f' ,
   },
   general:
   {
     fontSize: 35,
     fontWeight: "800",
-    marginTop: 10,
-      marginLeft: 10,
-    color: '#B0202F'
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingLeft: 10,
+    color: '#fff',
+    backgroundColor: '#939393',
   },
-  academics:
-  {
+  academics: {
     fontSize: 35,
     fontWeight: "800",
-    marginTop: 10,
-      marginLeft: 10,
-    color: '#B0202F'
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingLeft: 10,
+    color: '#fff',
+    backgroundColor: '#941ffc',
   },
-  date:
-  {
-    marginTop: 60, marginRight: 4, color:"#8c8b8a"
-  },
-
+  date: {
+    marginTop: 60,
+    marginRight: 4,
+    color: '#8c8b8a'
+  }
 });
 
 export const AppTextStyles = StyleSheet.create({
