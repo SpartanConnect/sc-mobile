@@ -7,7 +7,6 @@ This file contains the actual screen component used to display the announcement.
 import React, { Component } from 'react';
 import { Alert, Button, FlatList, RefreshControl, ScrollView, StyleSheet, StatusBar, Text, View, WebView, TouchableHighlight, I18nManager, Switch, TextInput, DrawerLayoutAndroid, DrawerConsts} from 'react-native';
 import HTMLView from 'react-native-htmlview';
-import renderIf from 'render-if';
 
 //import Swiper from 'react-native-swiper';
 import { AppStyles, AppTextStyles } from '../components/Styles';
