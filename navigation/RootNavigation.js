@@ -8,6 +8,7 @@ import registerForPushNotificationsAsync from '../api/registerForPushNotificatio
 import AnnouncementViewScreen from '../screens/Announcement';
 import { AppStyles, AppTextStyles } from '../components/Styles';
 import HomeScreen from '../screens/HomeScreen';
+import SettingsScreen from '../screens/SettingsScreen';
 
 /*
 Manages every page that exists. Essentially an index.
@@ -17,6 +18,9 @@ const RootStackNavigator = StackNavigator(
   {
     Home: {
       screen: HomeScreen,
+    },
+    Settings: {
+      screen: SettingsScreen,
     },
     Main: {
       screen: MainTabNavigator,
@@ -43,7 +47,10 @@ const RootStackNavigator = StackNavigator(
       headerLeft: <TouchableOpacity onPress={() => navigation.navigate('Home')}>
       <Image source={require('../assets/images/logoandtext.png')} style={{left: 0, width: 310, height: 80, padding: 0, margin: 0}} />
         </TouchableOpacity>,
-      headerRight: <Text style={AppStyles.date}>{new Date().toDateString()}</Text>,
+      headerRight: <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
+      <Image source={require('../assets/images/settings.png')} style={{left: 0, marginRight: 10, width: 30, height: 30, padding: 0, margin: 0}} />
+        </TouchableOpacity>
+        /*<Text style={AppStyles.date}>{new Date().toDateString()}</Text>,*/
     }),
   }
 );
