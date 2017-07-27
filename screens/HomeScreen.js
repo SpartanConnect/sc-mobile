@@ -131,6 +131,9 @@ export default class HomeScreen extends React.Component {
           announcement.tags.map((tag) => {
             if (tag.parentId === null) {
               // push the announcement in the appropriate category
+              if (!filteredAnnouncements[tag.slug]) {
+                filteredAnnouncements[tag.slug] = [];
+              }
               filteredAnnouncements[tag.slug].push({key: announcement.id, value: announcement});
             } else {
               // this is the code that runs when it isn't a category.
@@ -175,7 +178,7 @@ export default class HomeScreen extends React.Component {
     return (
 
       <ScrollView refreshControl={<RefreshControl refreshing={this.state.refreshing} onRefresh={this._onRefresh.bind(this)}/>} style={AppStyles.announcementsView}>
-           <StatusBar/>
+           
 
              {this.conditionalRender(this.state.categoryAnnouncements.urgent.length!=0,
              <View>
