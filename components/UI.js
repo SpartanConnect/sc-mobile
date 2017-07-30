@@ -4,11 +4,13 @@ Contains the announcment component that holds the information from the server.
 
 //IN PROGRESS: CHANGING BACKEND
 import React, { Component } from 'react';
-import { Alert, Button, FlatList, RefreshControl, ScrollView, StatusBar, TouchableOpacity, Text, View, WebView } from 'react-native';
+import { Alert, AsyncStorage, Button, FlatList, RefreshControl, ScrollView, StatusBar, TouchableOpacity, Text, View, WebView } from 'react-native';
 import HTMLView from 'react-native-htmlview';
 
 
 import { AppStyles, AppTextStyles } from './Styles';
+
+import SettingsScreen from '../screens/SettingsScreen';
 
 /*
 Core announcement component.
@@ -43,14 +45,44 @@ export class Announcement extends Component {
     });
   }
 
+
+  async getSettings()
+  {
+    try
+    {
+      return await AsyncStorage.getItem('@GradeLevel');
+    }
+    catch(error)
+    {
+      console.log('error', error);
+    }
+  }
+
+  conditionalRender(condition, content) {
+    let tagSettings = this.getSettings();
+    console.log(tagSettings);
+    if (tagSettings == 'all'){
+      return content;
+    }
+    else if (condition.map(tag => {return tag.slug}).includes(tagSettings))
+    {
+       return content;
+    }
+    else {
+       return null;
+    }
+  }
+
   render() {
     return (
-      <TouchableOpacity onPress={() => this.props.returnFunction(this.props.data)} >
-        <View style={AppStyles.announcement} onPress={() => this.props.returnFunction(this.props.data)}>
-          <Text style={AppTextStyles.heading}>{this.state.title}</Text>
-          <HTMLView style={AppStyles.announcementDescription} value={this.state.shortDescription}/>
-        </View>
-      </TouchableOpacity>
+      <View>{this.conditionalRender(this.props.data.tags,
+        <TouchableOpacity onPress={() => this.props.returnFunction(this.props.data)} >
+          <View style={AppStyles.announcement} onPress={() => this.props.returnFunction(this.props.data)}>
+            <Text style={AppTextStyles.heading}>{this.state.title}</Text>
+            <HTMLView style={AppStyles.announcementDescription} value={this.state.shortDescription}/>
+          </View>
+        </TouchableOpacity>)}
+      </View>
     );
   }
 }

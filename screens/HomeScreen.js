@@ -5,7 +5,7 @@ This file contains the actual screen component used to display the announcement.
 */
 
 import React, { Component } from 'react';
-import { Alert, Button, FlatList, RefreshControl, ScrollView, StyleSheet, StatusBar, Text, View, WebView, TouchableHighlight, I18nManager, Switch, TextInput, DrawerLayoutAndroid, DrawerConsts} from 'react-native';
+import { Alert, AsyncStorage, Button, FlatList, RefreshControl, ScrollView, StyleSheet, StatusBar, Text, View, WebView, TouchableHighlight, I18nManager, Switch, TextInput, DrawerLayoutAndroid, DrawerConsts} from 'react-native';
 import HTMLView from 'react-native-htmlview';
 
 //import Swiper from 'react-native-swiper';
@@ -22,6 +22,11 @@ export default class HomeScreen extends React.Component {
   };
 
   constructor(props) {
+    try {
+      AsyncStorage.getItem('@GradeLevel');
+    } catch (error) {
+      AsyncStorage.setItem('@GradeLevel', 'all');
+    }
     super(props);
     this.state = {
       // the announcements array holds all the announcement object.
@@ -128,7 +133,7 @@ export default class HomeScreen extends React.Component {
           // It's not guaranteed that each announcement will have
           // only one category, so this is done.
           announcement.tags.map((tag) => {
-            if (tag.parentId === null) {
+            if (tag.parentId === null && tag.visibility == 1) {
               // push the announcement in the appropriate category
               filteredAnnouncements[tag.slug].push({key: announcement.id, value: announcement});
             } else {
@@ -190,25 +195,25 @@ export default class HomeScreen extends React.Component {
              </View>)
            }
 
-           {this.conditionalRender(this.state.categoryAnnouncements.asb.length,
+           {this.conditionalRender(this.state.categoryAnnouncements.asb.length!=0,
              <View>
                <Text style= {AppStyles.asb}>ASB</Text>
                <FlatList data={this.state.categoryAnnouncements.asb} renderItem={({item}) => <Announcement id={item.value.id} data={item.value} returnFunction={this._onRedirect.bind(this)} />}/>
              </View>)}
 
-           {this.conditionalRender(this.state.categoryAnnouncements.academics.length,
+           {this.conditionalRender(this.state.categoryAnnouncements.academics.length!=0,
              <View>
               <Text style= {AppStyles.academics}>Academics</Text>
               <FlatList data={this.state.categoryAnnouncements.academics} renderItem={({item}) => <Announcement id={item.value.id} data={item.value} returnFunction={this._onRedirect.bind(this)} />}/>
             </View>)}
 
-           {this.conditionalRender(this.state.categoryAnnouncements.clubs.length,
+           {this.conditionalRender(this.state.categoryAnnouncements.clubs.length!=0,
              <View>
               <Text style= {AppStyles.clubs}>Clubs</Text>
               <FlatList data={this.state.categoryAnnouncements.clubs} renderItem={({item}) => <Announcement id={item.value.id} data={item.value} returnFunction={this._onRedirect.bind(this)} />}/>
             </View>)}
 
-           {this.conditionalRender(this.state.categoryAnnouncements.sports.length,
+           {this.conditionalRender(this.state.categoryAnnouncements.sports.length!=0,
              <View>
               <Text style= {AppStyles.sports}>Sports</Text>
               <FlatList data={this.state.categoryAnnouncements.sports} renderItem={({item}) => <Announcement id={item.value.id} data={item.value} returnFunction={this._onRedirect.bind(this)} />}/>
