@@ -22,8 +22,9 @@ export default class SettingsScreen extends React.Component {
         {/* Go ahead and delete ExpoConfigView and replace it with your
            * content, we just wanted to give you a quick view of your config */}
         <Text style={AppStyles.pageTitle}>Settings</Text>
-        <Text style={AppStyles.announcement}>Grade</Text>
+        <Text style={AppStyles.settings}>Grade</Text>
           <Picker
+            style={AppStyles.settingsPicker}
             selectedValue= {this.state.pickerValue}
             onValueChange={(itemValue, itemIndex) => this.valueChange(itemValue)}>
             <Picker.Item label="All" value="all" />
