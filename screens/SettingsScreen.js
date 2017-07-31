@@ -56,7 +56,6 @@ export default class SettingsScreen extends React.Component {
     {
       let currentValue = await AsyncStorage.getItem('@GradeLevel');
       this.setState({pickerValue: currentValue});
-      return currentValue;
     }
     catch(error)
     {

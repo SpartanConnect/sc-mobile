@@ -10,7 +10,7 @@ import HTMLView from 'react-native-htmlview';
 
 import { AppStyles, AppTextStyles } from './Styles';
 
-import SettingsScreen from '../screens/SettingsScreen';
+import HomeScreen from '../screens/HomeScreen';
 
 /*
 Core announcement component.
@@ -45,26 +45,11 @@ export class Announcement extends Component {
     });
   }
 
-
-  async getSettings()
-  {
-    try
-    {
-      return await AsyncStorage.getItem('@GradeLevel');
-    }
-    catch(error)
-    {
-      console.log('error', error);
-    }
-  }
-
   conditionalRender(condition, content) {
-    let tagSettings = this.getSettings();
-    console.log(tagSettings);
-    if (tagSettings == 'all'){
+    if (this.props.settings == 'all'){
       return content;
     }
-    else if (condition.map(tag => {return tag.slug}).includes(tagSettings))
+    else if (condition.map(tag => {return tag.slug}).includes(this.props.settings))
     {
        return content;
     }
