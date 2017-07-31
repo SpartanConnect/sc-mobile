@@ -101,6 +101,20 @@ export const AppStyles = StyleSheet.create({
     color: '#fff',
     backgroundColor: '#941ffc',
   },
+  settings: {
+    fontSize: 24,
+    fontWeight: "400",
+    paddingLeft: 20,
+  },
+  settingsView: {
+    paddingLeft: 20,
+    paddingRight: 20,
+    borderWidth: 1,
+    borderColor: '#bfbfbf',
+    marginLeft: 20,
+    marginRight: 20,
+    marginTop: 10
+  },
   date: {
     marginTop: 60,
     marginRight: 4,
