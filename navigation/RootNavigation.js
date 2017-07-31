@@ -3,7 +3,6 @@ import React from 'react';
 import { StackNavigator } from 'react-navigation';
 import { Image, Text, TouchableOpacity } from 'react-native';
 
-import MainTabNavigator from './MainTabNavigator';
 import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync';
 import AnnouncementViewScreen from '../screens/Announcement';
 import { AppStyles, AppTextStyles } from '../components/Styles';
@@ -22,9 +21,6 @@ const RootStackNavigator = StackNavigator(
     Settings: {
       screen: SettingsScreen,
     },
-    Main: {
-      screen: MainTabNavigator,
-    },
     Announcement: {
       screen: AnnouncementViewScreen
     },
@@ -37,7 +33,7 @@ const RootStackNavigator = StackNavigator(
         fontSize: 22
       },
       headerStyle: {
-        height: 100,
+        height: 80,
         backgroundColor: '#ffffff',
         shadowColor: '#8c8b8a',
         shadowOffset: {height:2},
