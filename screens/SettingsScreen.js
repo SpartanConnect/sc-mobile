@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Text, Picker, AsyncStorage } from 'react-native';
+import { ScrollView, StyleSheet, Text, Picker, AsyncStorage, View } from 'react-native';
 import { ExpoConfigView } from '@expo/samples';
 
 import { AppStyles, AppTextStyles } from '../components/Styles';
@@ -23,8 +23,9 @@ export default class SettingsScreen extends React.Component {
            * content, we just wanted to give you a quick view of your config */}
         <Text style={AppStyles.pageTitle}>Settings</Text>
         <Text style={AppStyles.settings}>Grade</Text>
+        <View
+          style={AppStyles.settingsPicker}>
           <Picker
-            style={AppStyles.settingsPicker}
             selectedValue= {this.state.pickerValue}
             onValueChange={(itemValue, itemIndex) => this.valueChange(itemValue)}>
             <Picker.Item label="All" value="all" />
@@ -35,6 +36,7 @@ export default class SettingsScreen extends React.Component {
             <Picker.Item label="11th" value="grade11" />
             <Picker.Item label="12th" value="grade12" />
           </Picker>
+        </View>
 
       </ScrollView>
     );

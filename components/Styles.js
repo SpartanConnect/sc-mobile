@@ -108,6 +108,7 @@ export const AppStyles = StyleSheet.create({
   },
   settingsPicker: {
     paddingLeft: 20,
+    paddingRight: 20,
   },
   date: {
     marginTop: 60,
