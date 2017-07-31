@@ -106,9 +106,14 @@ export const AppStyles = StyleSheet.create({
     fontWeight: "400",
     paddingLeft: 20,
   },
-  settingsPicker: {
+  settingsView: {
     paddingLeft: 20,
     paddingRight: 20,
+    borderWidth: 1,
+    borderColor: '#bfbfbf',
+    marginLeft: 20,
+    marginRight: 20,
+    marginTop: 10
   },
   date: {
     marginTop: 60,

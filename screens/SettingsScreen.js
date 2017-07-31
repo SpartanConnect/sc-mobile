@@ -24,7 +24,7 @@ export default class SettingsScreen extends React.Component {
         <Text style={AppStyles.pageTitle}>Settings</Text>
         <Text style={AppStyles.settings}>Grade</Text>
         <View
-          style={AppStyles.settingsPicker}>
+          style={AppStyles.settingsView}>
           <Picker
             selectedValue= {this.state.pickerValue}
             onValueChange={(itemValue, itemIndex) => this.valueChange(itemValue)}>
