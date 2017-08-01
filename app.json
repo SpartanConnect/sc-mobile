@@ -4,7 +4,7 @@
     "description": "Spartan Connect is a mobile app for LCHS students to read announcements.",
     "slug": "sc-mobile",
     "privacy": "public",
-    "sdkVersion": "18.0.0",
+    "sdkVersion": "19.0.0",
     "version": "0.14",
     "orientation": "portrait",
     "primaryColor": "#cccccc",
@@ -25,7 +25,8 @@
       "bundleIdentifier": "com.spartanconnect.SpartanConnect"
     },
     "android": {
-      "package": "com.spartanconnect.SpartanConnect"
+      "package": "com.spartanconnect.SpartanConnect",
+      "permissions": ["READ_INTERNAL_STORAGE", "READ_PHONE_STATE"]
     }
   }
 }

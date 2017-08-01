@@ -5,8 +5,7 @@
   "author": null,
   "main": "node_modules/expo/AppEntry.js",
   "devDependencies": {
-    "eslint-plugin-render-if": "^0.1.0",
-    "jest-expo": "~18.0.0"
+    "jest-expo": "~19.0.0"
   },
   "scripts": {
     "start": "react-native-scripts start",
@@ -20,9 +19,9 @@
   },
   "dependencies": {
     "@expo/samples": "~1.0.4",
-    "expo": "^18.0.4",
+    "expo": "^19.0.0",
     "react": "16.0.0-alpha.12",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-18.0.1.tar.gz",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-19.0.0.tar.gz",
     "react-native-htmlview": "^0.9.0",
     "react-navigation": "^1.0.0-beta.11"
   }
