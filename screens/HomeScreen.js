@@ -189,39 +189,75 @@ export default class HomeScreen extends React.Component {
       <ScrollView refreshControl={<RefreshControl refreshing={this.state.refreshing} onRefresh={this._onRefresh.bind(this)}/>} style={AppStyles.announcementsView}>
            <StatusBar/>
 
-             {this.conditionalRender(this.state.categoryAnnouncements.urgent.length!=0,
+             {this.conditionalRender(this.state.categoryAnnouncements.urgent.length!=0 && (this.state.settings == 'all' || this.state.categoryAnnouncements.urgent.map( announcement => {
+               value = announcement.value.tags.map((tag) => {
+                 return tag.slug;
+               });
+               console.log(value);
+               return value.includes(this.state.settings);
+             }).includes(true)),
              <View>
                <Text style= {AppStyles.urgent}>Urgent</Text>
                <FlatList data={this.state.categoryAnnouncements.urgent} renderItem={({item}) => <Announcement settings={this.state.settings} id={item.value.id} data={item.value} returnFunction={this._onRedirect.bind(this)} />}/>
              </View>)}
 
 
-           {this.conditionalRender(this.state.categoryAnnouncements.general.length!=0,
+           {this.conditionalRender(this.state.categoryAnnouncements.general.length!=0 && (this.state.settings == 'all' || this.state.categoryAnnouncements.general.map( announcement => {
+             value = announcement.value.tags.map((tag) => {
+               return tag.slug;
+             });
+             console.log(value);
+             return value.includes(this.state.settings);
+           }).includes(true)),
              <View>
              <Text style= {AppStyles.general}>General</Text>
              <FlatList data={this.state.categoryAnnouncements.general} renderItem={({item}) => <Announcement settings={this.state.settings} id={item.value.id} data={item.value} returnFunction={this._onRedirect.bind(this)} />}/>
              </View>)
            }
 
-           {this.conditionalRender(this.state.categoryAnnouncements.asb.length!=0,
+           {this.conditionalRender(this.state.categoryAnnouncements.asb.length!=0  && (this.state.settings == 'all' || this.state.categoryAnnouncements.asb.map( announcement => {
+             value = announcement.value.tags.map((tag) => {
+               return tag.slug;
+             });
+             console.log(value);
+             return value.includes(this.state.settings);
+           })),
              <View>
                <Text style= {AppStyles.asb}>ASB</Text>
                <FlatList data={this.state.categoryAnnouncements.asb} renderItem={({item}) => <Announcement settings={this.state.settings} id={item.value.id} data={item.value} returnFunction={this._onRedirect.bind(this)} />}/>
              </View>)}
 
-           {this.conditionalRender(this.state.categoryAnnouncements.academics.length!=0,
+           {this.conditionalRender(this.state.categoryAnnouncements.academics.length!=0  && (this.state.settings == 'all' || this.state.categoryAnnouncements.academics.map( announcement => {
+             value = announcement.value.tags.map((tag) => {
+               return tag.slug;
+             });
+             console.log(value);
+             return value.includes(this.state.settings);
+           }).includes(true)),
              <View>
               <Text style= {AppStyles.academics}>Academics</Text>
               <FlatList data={this.state.categoryAnnouncements.academics} renderItem={({item}) => <Announcement settings={this.state.settings} id={item.value.id} data={item.value} returnFunction={this._onRedirect.bind(this)} />}/>
             </View>)}
 
-           {this.conditionalRender(this.state.categoryAnnouncements.clubs.length!=0,
+           {this.conditionalRender(this.state.categoryAnnouncements.clubs.length!=0  && (this.state.settings == 'all' || this.state.categoryAnnouncements.clubs.map( announcement => {
+             value = announcement.value.tags.map((tag) => {
+               return tag.slug;
+             });
+             console.log(value);
+             return value.includes(this.state.settings);
+           }).includes(true)),
              <View>
               <Text style= {AppStyles.clubs}>Clubs</Text>
               <FlatList data={this.state.categoryAnnouncements.clubs} renderItem={({item}) => <Announcement settings={this.state.settings} id={item.value.id} data={item.value} returnFunction={this._onRedirect.bind(this)} />}/>
             </View>)}
 
-           {this.conditionalRender(this.state.categoryAnnouncements.sports.length!=0,
+           {this.conditionalRender(this.state.categoryAnnouncements.sports.length!=0  && (this.state.settings == 'all' || this.state.categoryAnnouncements.sports.map( announcement => {
+             value = announcement.value.tags.map((tag) => {
+               return tag.slug;
+             });
+             console.log(value);
+             return value.includes(this.state.settings);
+           }).includes(true)),
              <View>
               <Text style= {AppStyles.sports}>Sports</Text>
               <FlatList data={this.state.categoryAnnouncements.sports} renderItem={({item}) => <Announcement settings={this.state.settings} id={item.value.id} data={item.value} returnFunction={this._onRedirect.bind(this)} />}/>
