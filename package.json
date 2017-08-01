@@ -5,8 +5,7 @@
   "author": null,
   "main": "node_modules/expo/AppEntry.js",
   "devDependencies": {
-    "eslint-plugin-render-if": "^0.1.0",
-    "jest-expo": "~18.0.0"
+    "jest-expo": "~19.0.0"
   },
   "scripts": {
     "start": "react-native-scripts start",
