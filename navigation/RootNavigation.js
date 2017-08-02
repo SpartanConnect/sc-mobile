@@ -1,7 +1,7 @@
 import { Notifications } from 'expo';
 import React from 'react';
 import { StackNavigator } from 'react-navigation';
-import { Image, Text, TouchableOpacity } from 'react-native';
+import { Image, Text, TouchableOpacity, Platform } from 'react-native';
 
 import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync';
 import AnnouncementViewScreen from '../screens/Announcement';
@@ -33,7 +33,7 @@ const RootStackNavigator = StackNavigator(
         fontSize: 22
       },
       headerStyle: {
-        height: 80,
+        height: (Platform.OS === 'ios') ? 100 : 80,
         backgroundColor: '#ffffff',
         shadowColor: '#8c8b8a',
         shadowOffset: {height:2},
