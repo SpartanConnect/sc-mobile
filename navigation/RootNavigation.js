@@ -57,7 +57,7 @@ const RootStackNavigator = StackNavigator(
       headerLeft: <TouchableOpacity onPress={() => navigation.dispatch(resetHome)}>
       <Image source={require('../assets/images/logoandtext.png')} style={{left: 0, width: 310, height: 80, padding: 0, margin: 0}} />
         </TouchableOpacity>,
-      headerRight: <TouchableOpacity onPress={() => navigation.dispatch(ResetSettings)}>
+      headerRight: <TouchableOpacity onPress={() => navigation.dispatch(resetSettings)}>
       <Image source={require('../assets/images/settings.png')} style={{left: 0, marginRight: 10, width: 30, height: 30, padding: 0, margin: 0}} />
         </TouchableOpacity>
         /*<Text style={AppStyles.date}>{new Date().toDateString()}</Text>,*/
