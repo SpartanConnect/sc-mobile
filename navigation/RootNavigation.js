@@ -13,14 +13,14 @@ import SettingsScreen from '../screens/SettingsScreen';
 Manages every page that exists. Essentially an index.
 */
 
-const resetAction = NavigationActions.reset({
+const resetHome = NavigationActions.reset({
   index: 0,
   actions: [
     NavigationActions.navigate({ routeName: 'Home'})
   ]
 });
 
-const resetAction2 = NavigationActions.reset({
+const resetSettings = NavigationActions.reset({
   index: 0,
   actions: [
     NavigationActions.navigate({ routeName: 'Settings'})
@@ -54,10 +54,10 @@ const RootStackNavigator = StackNavigator(
         shadowOpacity: .3,
         shadowRadius: 2
       },
-      headerLeft: <TouchableOpacity onPress={() => navigation.dispatch(resetAction)}>
+      headerLeft: <TouchableOpacity onPress={() => navigation.dispatch(resetHome)}>
       <Image source={require('../assets/images/logoandtext.png')} style={{left: 0, width: 310, height: 80, padding: 0, margin: 0}} />
         </TouchableOpacity>,
-      headerRight: <TouchableOpacity onPress={() => navigation.dispatch(resetAction2)}>
+      headerRight: <TouchableOpacity onPress={() => navigation.dispatch(ResetSettings)}>
       <Image source={require('../assets/images/settings.png')} style={{left: 0, marginRight: 10, width: 30, height: 30, padding: 0, margin: 0}} />
         </TouchableOpacity>
         /*<Text style={AppStyles.date}>{new Date().toDateString()}</Text>,*/
