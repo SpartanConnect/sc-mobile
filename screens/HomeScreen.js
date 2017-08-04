@@ -76,6 +76,7 @@ export default class HomeScreen extends React.Component {
       this.setState({refreshing: false});
       this.forceUpdate();
     });
+    this.SettingsRefresh();
   }
 
   _onRedirect(announcementData) {

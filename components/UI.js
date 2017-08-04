@@ -20,7 +20,8 @@ export class Announcement extends Component {
     super(props);
     this.state = {
       title: "Loading Announcement",
-      description: "Loading Announcement Description"
+      description: "Loading Announcement Description",
+      shortDescription: "Loading..."
     };
 
     //this.retrieveContent();

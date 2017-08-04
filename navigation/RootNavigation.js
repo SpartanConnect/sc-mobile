@@ -1,6 +1,6 @@
 import { Notifications } from 'expo';
 import React from 'react';
-import { StackNavigator } from 'react-navigation';
+import { StackNavigator, NavigationActions } from 'react-navigation';
 import { Image, Text, TouchableOpacity, Platform } from 'react-native';
 
 import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync';
@@ -12,6 +12,20 @@ import SettingsScreen from '../screens/SettingsScreen';
 /*
 Manages every page that exists. Essentially an index.
 */
+
+const resetAction = NavigationActions.reset({
+  index: 0,
+  actions: [
+    NavigationActions.navigate({ routeName: 'Home'})
+  ]
+});
+
+const resetAction2 = NavigationActions.reset({
+  index: 0,
+  actions: [
+    NavigationActions.navigate({ routeName: 'Settings'})
+  ]
+});
 
 const RootStackNavigator = StackNavigator(
   {
@@ -40,10 +54,10 @@ const RootStackNavigator = StackNavigator(
         shadowOpacity: .3,
         shadowRadius: 2
       },
-      headerLeft: <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+      headerLeft: <TouchableOpacity onPress={() => navigation.dispatch(resetAction)}>
       <Image source={require('../assets/images/logoandtext.png')} style={{left: 0, width: 310, height: 80, padding: 0, margin: 0}} />
         </TouchableOpacity>,
-      headerRight: <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
+      headerRight: <TouchableOpacity onPress={() => navigation.dispatch(resetAction2)}>
       <Image source={require('../assets/images/settings.png')} style={{left: 0, marginRight: 10, width: 30, height: 30, padding: 0, margin: 0}} />
         </TouchableOpacity>
         /*<Text style={AppStyles.date}>{new Date().toDateString()}</Text>,*/
