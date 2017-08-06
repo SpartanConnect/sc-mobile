@@ -25,10 +25,10 @@ export default class AppContainer extends React.Component {
         ],
       });
     } catch (e) {
-      console.warn(
+      /*console.warn(
         'There was an error caching assets (see: main.js), perhaps due to a ' +
           'network timeout, so we skipped caching. Reload the app to try again.'
-      );
+      );*/
       console.log(e.message);
     } finally {
       this.setState({ appIsReady: true });
@@ -40,8 +40,7 @@ export default class AppContainer extends React.Component {
       return (
         <View style={styles.container}>
           {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-          {Platform.OS === 'android' &&
-            <View style={styles.statusBarUnderlay} />}
+          {Platform.OS === 'android' && <View style={styles.statusBarUnderlay} />}
           <RootNavigation />
         </View>
       );

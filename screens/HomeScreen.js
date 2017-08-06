@@ -5,133 +5,134 @@ This file contains the actual screen component used to display the announcement.
 */
 
 import React, { Component } from 'react';
-import { Alert, AsyncStorage, Button, FlatList, RefreshControl, ScrollView, StyleSheet, StatusBar, Text, View, WebView, TouchableHighlight, I18nManager, Switch, TextInput, DrawerLayoutAndroid, DrawerConsts} from 'react-native';
+import { Image, TouchableOpacity, Alert, AsyncStorage, Button, FlatList, RefreshControl, ScrollView, StyleSheet, StatusBar, Text, View, WebView, TouchableHighlight, I18nManager, Switch, TextInput, DrawerLayoutAndroid, DrawerConsts} from 'react-native';
 import HTMLView from 'react-native-htmlview';
 
-//import Swiper from 'react-native-swiper';
 import { AppStyles, AppTextStyles } from '../components/Styles';
 import { Announcement } from '../components/UI';
 import { API_CALL } from '../constants/APICalls';
+import { NavigationActions } from 'react-navigation';
 
 /*
 The screen that holds the announcements.
 */
 export default class HomeScreen extends React.Component {
-  static navigationOptions = {
-    /*text goes here if you need it*/
-  };
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      // the announcements array holds all the announcement object.
-      announcements: [],
-      refreshing: true,
-      categoryAnnouncements: {
-        asb: [],
-        academics: [],
-        general: [],
-        counseling: [],
-        clubs: [],
-        sports: [],
-        urgent: []
-      },
-      categories: [],
-      settings: null
-    };
-    new Promise(this.retrieveCurrentAnnouncements.bind(this)).then(() => {
-      this.setState({refreshing: false});
+    static navigationOptions = ({ navigation }) => ({
+        headerLeft:
+            <Image source={require('../assets/images/logoandtext.png')} style={{left: 0, width: 310, height: 80, padding: 0, margin: 0}}/>,
+        headerRight:
+            <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
+                <Image source={require('../assets/images/settings.png')} style={{left: 0, marginRight: 10, width: 30, height: 30, padding: 0, margin: 0}} />
+            </TouchableOpacity>
     });
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            announcements: [],
+            refreshing: true,
+            categoryAnnouncements: {
+                asb: [],
+                academics: [],
+                general: [],
+                counseling: [],
+                clubs: [],
+                sports: [],
+                urgent: []
+            },
+            categories: [],
+            settings: null
+        };
+
+        new Promise(this.retrieveCurrentAnnouncements.bind(this)).then(() => {
+            this.setState({refreshing: false});
+        });
 
     // Refreshes when app starts.
-    new Promise(this.retrieveCurrentAnnouncements.bind(this)).then(() => {
-      this.setState({refreshing: false});
-      this.forceUpdate();
-    });
-    this.SettingsRefresh();
-  }
+        new Promise(this.retrieveCurrentAnnouncements.bind(this)).then(() => {
+            this.setState({refreshing: false});
+            this.forceUpdate();
+        });
+        this.SettingsRefresh();
+    }
 
-  async SettingsRefresh()
-  {
-      try {
-        let temp = await AsyncStorage.getItem('@GradeLevel');
-        if(temp != null)
-        {
-          this.setState({settings: temp});
+    async SettingsRefresh() {
+        try {
+            let temp = await AsyncStorage.getItem('@GradeLevel');
+            if(temp != null) {
+                this.setState({settings: temp});
+            } else {
+                await AsyncStorage.setItem('@GradeLevel', 'all');
+                this.setState({settings: 'all'});
+            }
+        } catch (error) {
+            await AsyncStorage.setItem('@GradeLevel', 'all');
+            this.setState({settings: 'all'});
         }
-        else
-        {
-          await AsyncStorage.setItem('@GradeLevel', 'all');
-          this.setState({settings: 'all'});
-        }
-      } catch (error) {
-        await AsyncStorage.setItem('@GradeLevel', 'all');
-        this.setState({settings: 'all'});
-      }
-  }
+    }
 
-  _onRefresh() {
-    this.setState({refreshing: true});
-    new Promise(this.retrieveCurrentAnnouncements.bind(this)).then(() => {
-      this.setState({refreshing: false});
-      this.forceUpdate();
-    });
-    this.SettingsRefresh();
-  }
+    _onRefresh() {
+        this.setState({refreshing: true});
+        new Promise(this.retrieveCurrentAnnouncements.bind(this)).then(() => {
+            this.setState({refreshing: false});
+            this.forceUpdate();
+        });
+        this.SettingsRefresh();
+    }
 
-  _onRedirect(announcementData) {
-    const { navigate } = this.props.navigation;
-    navigate('Announcement', {data: announcementData});
-  }
+    _onRedirect(announcementData) {
+        const { navigate } = this.props.navigation;
+        navigate('Announcement', {data: announcementData});
+    }
 
-  retrieveCurrentAnnouncements(resolve, reject) {
-    try {
+    retrieveCurrentAnnouncements(resolve, reject) {
+        try {
       // retrieves categories
-      let categories = fetch(API_CALL+'tags/?parentId=0&visibility=1', {
-        method: 'GET',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        }
-      }).then((response) => {
-        return response.json();
-      }).then((categoriesJson) => {
-        this.setState((state) => {
-          return {
-            categories: categoriesJson.map((category) => {
-              return {key: category.id, value: category}
-            })
-          };
-        });
-        resolve(categoriesJson);
-        return categoriesJson;
-      });
+            let categories = fetch(API_CALL+'tags/?parentId=0&visibility=1', {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                }
+            }).then((response) => {
+                return response.json();
+            }).then((categoriesJson) => {
+                this.setState((state) => {
+                    return {
+                        categories: categoriesJson.map((category) => {
+                            return {key: category.id, value: category}
+                        })
+                    };
+                });
+                resolve(categoriesJson);
+                return categoriesJson;
+            });
 
-      let currents = fetch(API_CALL+'announcements/current', {
-        method: 'GET',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        }
-      }).then((response) => {
-        return response.json();
-      }).then((responseJson) => {
-        // Getting a massive list of announcements -- but not filtered!
-        var index = 0;
-        var keyArray = responseJson.map((result) => {
-          index = index + 1;
-          return {key: index, value: result};
-        });
-        this.setState((state) => {
-          return {
-            announcements: keyArray
-          };
-        });
-        resolve(responseJson);
-        return responseJson;
-      }).catch((error) => {
-        console.error(error);
-      });
+            let currents = fetch(API_CALL+'announcements/current', {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                }
+            }).then((response) => {
+                return response.json();
+            }).then((responseJson) => {
+                // Getting a massive list of announcements -- but not filtered!
+                var index = 0;
+                var keyArray = responseJson.map((result) => {
+                    index = index + 1;
+                    return {key: index, value: result};
+                });
+                this.setState((state) => {
+                    return {
+                        announcements: keyArray
+                    };
+                });
+                resolve(responseJson);
+                return responseJson;
+            }).catch((error) => {
+                console.error(error);
+            });
 
 
       // Waits for categories and announcements to be retrieved
@@ -189,12 +190,9 @@ export default class HomeScreen extends React.Component {
  }
 
   render() {
+    const { navigate } = this.props.navigation;
 
-     const { navigate } = this.props.navigation;
-
-     // Loads in a list of all the announcements.
     return (
-
       <ScrollView refreshControl={<RefreshControl refreshing={this.state.refreshing} onRefresh={this._onRefresh.bind(this)}/>} style={AppStyles.announcementsView}>
            <StatusBar/>
 

@@ -102,6 +102,7 @@ export const AppStyles = StyleSheet.create({
     backgroundColor: '#941ffc',
   },
   settings: {
+    marginTop: 10,
     fontSize: 24,
     fontWeight: "400",
     paddingLeft: 20,
@@ -114,6 +115,10 @@ export const AppStyles = StyleSheet.create({
     marginLeft: 20,
     marginRight: 20,
     marginTop: 10
+  },
+  helperText: {
+    paddingLeft: 20,
+    marginTop: 5  
   },
   date: {
     marginTop: 60,
