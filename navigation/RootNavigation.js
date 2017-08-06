@@ -1,53 +1,61 @@
-import { Notifications } from 'expo';
 import React from 'react';
-import { StackNavigator } from 'react-navigation';
-import { Image, Text } from 'react-native';
+import { StackNavigator, NavigationActions } from 'react-navigation';
+import { Image, Text, TouchableOpacity, Platform } from 'react-native';
 
-import MainTabNavigator from './MainTabNavigator';
-import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync';
-import AnnouncementViewScreen from '../screens/Announcement';
 import { AppStyles, AppTextStyles } from '../components/Styles';
+import HomeScreen from '../screens/HomeScreen';
+import SettingsScreen from '../screens/SettingsScreen';
+import AnnouncementViewScreen from '../screens/Announcement';
 
-/*
-Manages every page that exists. Essentially an index.
-*/
-
-const RootStackNavigator = StackNavigator(
-  {
-    Main: {
-      screen: MainTabNavigator,
+const RootStackNavigator = StackNavigator({
+    Home: {
+        screen: HomeScreen,
+    },
+    Settings: {
+        screen: SettingsScreen,
     },
     Announcement: {
-      screen: AnnouncementViewScreen
+        screen: AnnouncementViewScreen
     },
-  },
-  {
-    navigationOptions: () => ({
-      headerTitleStyle: {
-        fontWeight: 'bold',
-        justifyContent: 'flex-end',
-        fontSize: 22
-      },
-      headerStyle: {
-        height: 100,
-        backgroundColor: '#ffffff',
-        shadowColor: '#8c8b8a',
-        shadowOffset: {height:2},
-        shadowOpacity: .3,
-        shadowRadius: 2
-
-      },
-      headerLeft: <Image source={require ('../assets/images/logoandtext.png')}
-        style={{left: 0, width: 310, height: 80, padding: 0, margin: 0}} />,
-      headerRight: <Text style={AppStyles.date}>{new Date().toDateString()}</Text>,
+},
+{
+    navigationOptions: ({ navigation }) => ({
+        headerTitleStyle: {
+            fontWeight: 'bold',
+            justifyContent: 'flex-end',
+            fontSize: 22,
+            color: '#a6192e'
+        },
+        headerStyle: {
+            height: (Platform.OS === 'ios') ? 100 : 80,
+            backgroundColor: '#ffffff',
+            shadowColor: '#8c8b8a',
+            shadowOffset: {height:2},
+            shadowOpacity: .3,
+            shadowRadius: 2
+        },
+        headerTintColor: '#a6192e'
     }),
-  }
-);
+});
+
+function getCurrentRouteName(navigationState) {
+    if(!navigationState) { return null; }
+
+    const route = navigationState.routes[navigationState.index];
+    if(route.routes) {
+        return getCurrentRouteName(route);
+    }
+    return route;
+}
 
 export default class RootNavigator extends React.Component {
+    render() {
+        return <RootStackNavigator onNavigationStateChange={(previousState, currentState) => {
+            const currentScreen = getCurrentRouteName(currentState);
+            if(currentScreen.routeName == "Home") {
 
-  render() {
-    return <RootStackNavigator />;
-  }
-
+            }
+        }}
+        />
+    }
 }

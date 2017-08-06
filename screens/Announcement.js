@@ -5,9 +5,10 @@ import HTMLView from 'react-native-htmlview';
 import { AppStyles, AppTextStyles } from '../components/Styles';
 
 export default class AnnouncementView extends React.Component {
-  static navigationOptions = {
-
-  };
+    static navigationOptions = ({ navigation }) => {
+        const { state } = navigation;
+        return { title: state.params.data.title }
+    };
 
   constructor(props) {
     super(props);
@@ -33,18 +34,18 @@ export default class AnnouncementView extends React.Component {
     }
   }
 
-  render() {
-    return (
-      <View style={AppStyles.announcement}>
-        <ScrollView>
-        <Text style={AppTextStyles.heading}>{this.props.navigation.state.params.data.title}</Text>
-        <Text style={AppStyles.announcementDescription}>Posted by {this.props.navigation.state.params.data.creator.name}</Text>
-        <Text style={AppStyles.announcementCoreText}>{this.props.navigation.state.params.data.description}</Text>
-        <Text style={AppStyles.announcementDescription}>{this.props.navigation.state.params.data.tags.map(tag => {return "#"+tag.name + " ";})}</Text>
-        </ScrollView>
-      </View>
-    );
-  }
+    render() {
+        return (
+            <View style={AppStyles.announcement}>
+                <ScrollView>
+                    <Text style={AppTextStyles.heading}>{this.props.navigation.state.params.data.title}</Text>
+                    <Text style={AppStyles.announcementDescription}>Posted by {this.props.navigation.state.params.data.creator.name}</Text>
+                    <Text style={AppStyles.announcementCoreText}>{this.props.navigation.state.params.data.description}</Text>
+                    <Text style={AppStyles.announcementDescription}>{this.props.navigation.state.params.data.tags.map(tag => {return "#"+tag.name + " ";})}</Text>
+                </ScrollView>
+            </View>
+        );
+    }
 }
 
 // Web Screen for Announcement
