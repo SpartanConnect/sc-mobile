@@ -200,7 +200,6 @@ export default class HomeScreen extends React.Component {
                value = announcement.value.tags.map((tag) => {
                  return tag.slug;
                });
-               console.log(value);
                return value.includes(this.state.settings);
              }).includes(true)),
              <View>
@@ -213,7 +212,6 @@ export default class HomeScreen extends React.Component {
              value = announcement.value.tags.map((tag) => {
                return tag.slug;
              });
-             console.log(value);
              return value.includes(this.state.settings);
            }).includes(true)),
              <View>
@@ -226,7 +224,6 @@ export default class HomeScreen extends React.Component {
              value = announcement.value.tags.map((tag) => {
                return tag.slug;
              });
-             console.log(value);
              return value.includes(this.state.settings);
            })),
              <View>
@@ -238,7 +235,6 @@ export default class HomeScreen extends React.Component {
              value = announcement.value.tags.map((tag) => {
                return tag.slug;
              });
-             console.log(value);
              return value.includes(this.state.settings);
            }).includes(true)),
              <View>
@@ -250,7 +246,6 @@ export default class HomeScreen extends React.Component {
              value = announcement.value.tags.map((tag) => {
                return tag.slug;
              });
-             console.log(value);
              return value.includes(this.state.settings);
            }).includes(true)),
              <View>
@@ -262,7 +257,6 @@ export default class HomeScreen extends React.Component {
              value = announcement.value.tags.map((tag) => {
                return tag.slug;
              });
-             console.log(value);
              return value.includes(this.state.settings);
            }).includes(true)),
              <View>

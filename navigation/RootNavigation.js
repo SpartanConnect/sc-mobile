@@ -53,7 +53,7 @@ export default class RootNavigator extends React.Component {
         return <RootStackNavigator onNavigationStateChange={(previousState, currentState) => {
             const currentScreen = getCurrentRouteName(currentState);
             if(currentScreen.routeName == "Home") {
-                
+
             }
         }}
         />
