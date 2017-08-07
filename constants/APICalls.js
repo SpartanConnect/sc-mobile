@@ -1,1 +1,1 @@
-export const API_CALL = "https://apisc.encadyma.com/";
+export const API_CALL = "https://connectapi.lchsspartans.net/";
