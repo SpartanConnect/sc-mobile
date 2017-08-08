@@ -1,7 +1,8 @@
 import { Permissions, Notifications } from 'expo';
+import { API_CALL } from '../constants/APICalls';
 
 // Example server, implemented in Rails: https://git.io/vKHKv
-const PUSH_ENDPOINT = 'https://exponent-push-server.herokuapp.com/tokens';
+const PUSH_ENDPOINT = `${API_CALL}users/hook-push/token`;
 
 export default (async function registerForPushNotificationsAsync() {
   // Android remote notification permissions are granted during the app
@@ -14,19 +15,17 @@ export default (async function registerForPushNotificationsAsync() {
   }
 
   // Get the token that uniquely identifies this device
-  let token = await Notifications.getExponentPushTokenAsync();
+  let token = await Notifications.getExpoPushTokenAsync();
 
   // POST the token to our backend so we can use it to send pushes from there
   return fetch(PUSH_ENDPOINT, {
-    method: 'POST',
+    method: 'PUT',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      token: {
-        value: token,
-      },
+      token: token
     }),
   });
 });

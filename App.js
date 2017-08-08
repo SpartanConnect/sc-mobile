@@ -1,19 +1,27 @@
 import React from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
-import { AppLoading } from 'expo';
+import { AppLoading, Notifications } from 'expo';
 import { FontAwesome } from '@expo/vector-icons';
 import RootNavigation from './navigation/RootNavigation';
+import registerForPushNotificationsAsync from './api/registerForPushNotificationsAsync';
 
 import cacheAssetsAsync from './utilities/cacheAssetsAsync';
 
 export default class AppContainer extends React.Component {
   state = {
     appIsReady: false,
+    notification: {}
   };
 
   componentWillMount() {
     this._loadAssetsAsync();
+    registerForPushNotificationsAsync();
+    this._notificationSubscription = Notifications.addListener(this._handleNotification);
   }
+
+  _handleNotification = (notification) => {
+    this.setState({notification: notification});
+  };
 
   async _loadAssetsAsync() {
     try {
