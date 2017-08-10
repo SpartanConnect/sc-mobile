@@ -7,7 +7,7 @@ const PUSH_ENDPOINT = `${API_CALL}users/hook-push/token`;
 export default (async function registerForPushNotificationsAsync() {
   // Android remote notification permissions are granted during the app
   // install, so this will only ask on iOS
-  const { existingStatus } = await Permissions.getAsync(Permissions.REMOTE_NOTIFICATIONS);
+  const { existingStatus } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
   let finalStatus = existingStatus;
 
   // If the answer is no to existing status, let's ask again.
