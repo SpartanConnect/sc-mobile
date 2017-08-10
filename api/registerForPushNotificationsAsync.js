@@ -7,10 +7,17 @@ const PUSH_ENDPOINT = `${API_CALL}users/hook-push/token`;
 export default (async function registerForPushNotificationsAsync() {
   // Android remote notification permissions are granted during the app
   // install, so this will only ask on iOS
-  let { status } = await Permissions.askAsync(Permissions.REMOTE_NOTIFICATIONS);
+  const { existingStatus } = await Permissions.getAsync(Permissions.REMOTE_NOTIFICATIONS);
+  let finalStatus = existingStatus;
+
+  // If the answer is no to existing status, let's ask again.
+  if (existingStatus !== 'granted') {
+    const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+    finalStatus = status;
+  }
 
   // Stop here if the user did not grant permissions
-  if (status !== 'granted') {
+  if (finalStatus !== 'granted') {
     return;
   }
 
@@ -21,7 +28,7 @@ export default (async function registerForPushNotificationsAsync() {
   return fetch(PUSH_ENDPOINT, {
     method: 'PUT',
     headers: {
-      Accept: 'application/json',
+      'Accept': 'application/json',
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
