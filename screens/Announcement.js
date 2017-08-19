@@ -38,10 +38,10 @@ export default class AnnouncementView extends React.Component {
         return (
             <View style={AppStyles.announcement}>
                 <ScrollView>
-                    <Text style={AppTextStyles.heading}>{this.props.navigation.state.params.data.title}</Text>
-                    <Text style={AppStyles.announcementDescription}>Posted by {this.props.navigation.state.params.data.creator.name}</Text>
-                    <Text style={AppStyles.announcementCoreText}>{this.props.navigation.state.params.data.description}</Text>
-                    <Text style={AppStyles.announcementDescription}>{this.props.navigation.state.params.data.tags.map(tag => {return "#"+tag.name + " ";})}</Text>
+                    <Text selectable={true} style={AppTextStyles.heading}>{this.props.navigation.state.params.data.title}</Text>
+                    <Text selectable={true} style={AppStyles.announcementDescription}>Posted by {this.props.navigation.state.params.data.creator.name}</Text>
+                    <Text selectable={true} style={AppStyles.announcementCoreText}>{this.props.navigation.state.params.data.description}</Text>
+                    <Text selectable={true} style={AppStyles.announcementDescription}>{this.props.navigation.state.params.data.tags.map(tag => {return "#"+tag.name + " ";})}</Text>
                 </ScrollView>
             </View>
         );

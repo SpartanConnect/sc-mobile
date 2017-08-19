@@ -225,7 +225,7 @@ export default class HomeScreen extends React.Component {
                return tag.slug;
              });
              return value.includes(this.state.settings);
-           })),
+           }).includes(true)),
              <View>
                <Text style= {AppStyles.asb}>ASB</Text>
                <FlatList data={this.state.categoryAnnouncements.asb} renderItem={({item}) => <Announcement settings={this.state.settings} id={item.value.id} data={item.value} returnFunction={this._onRedirect.bind(this)} />}/>
