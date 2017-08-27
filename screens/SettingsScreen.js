@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Text, Picker, AsyncStorage, View, Switch } from 'react-native';
+import { ScrollView, StyleSheet, Text, Picker, AsyncStorage, View, Switch, Alert} from 'react-native';
 import { ExpoConfigView } from '@expo/samples';
 
 import { AppStyles, AppTextStyles } from '../components/Styles';
@@ -41,12 +41,32 @@ export default class SettingsScreen extends React.Component {
             </ScrollView>
         );
     }
-
+    async switchVal(itemValue)
+    {
+        await AsyncStorage.setItem('@pushNotif', itemValue.toString());
+        this.setState({switcher: itemValue});
+        registerForPushNotificationsAsync();
+    }
     async switchChange(itemValue, itemIndex){
       try {
-          await AsyncStorage.setItem('@pushNotif', itemValue.toString());
-          this.setState({switcher: itemValue});
-          registerForPushNotificationsAsync();
+          if(!itemValue)
+          {
+            Alert.alert(
+              'Push Notifications',
+              'Are you sure you would like to disable push notifications? You will not be able to stay up to date with the latest LCHS events.',
+              [
+                {text: 'No', onPress: () => {}, style: 'cancel'},
+                {text: 'Yes', onPress: () => switchVal(itemValue)}
+              ],
+              { cancelable: false}
+            )
+          }
+          else
+          {
+            await AsyncStorage.setItem('@pushNotif', itemValue.toString());
+            this.setState({switcher: itemValue});
+            registerForPushNotificationsAsync();
+          }
       } catch(error) {
           console.log('error', error);
       }
