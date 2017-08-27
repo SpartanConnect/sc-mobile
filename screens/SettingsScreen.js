@@ -3,7 +3,7 @@ import { ScrollView, StyleSheet, Text, Picker, AsyncStorage, View, Switch, Alert
 import { ExpoConfigView } from '@expo/samples';
 
 import { AppStyles, AppTextStyles } from '../components/Styles';
-import registerForPushNotificationsAsync from './api/registerForPushNotificationsAsync';
+import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync';
 
 export default class SettingsScreen extends React.Component {
     static navigationOptions = ({ navigation }) => ({
@@ -41,31 +41,27 @@ export default class SettingsScreen extends React.Component {
             </ScrollView>
         );
     }
-    async switchVal(itemValue)
-    {
+
+    async switchVal(itemValue) {
         await AsyncStorage.setItem('@pushNotif', itemValue.toString());
         this.setState({switcher: itemValue});
         registerForPushNotificationsAsync();
     }
+
     async switchChange(itemValue, itemIndex){
       try {
-          if(!itemValue)
-          {
+          if (!itemValue) {
             Alert.alert(
               'Push Notifications',
               'Are you sure you would like to disable push notifications? You will not be able to stay up to date with the latest LCHS events.',
               [
                 {text: 'No', onPress: () => {}, style: 'cancel'},
-                {text: 'Yes', onPress: () => switchVal(itemValue)}
+                {text: 'Yes', onPress: () => {this.switchVal(itemValue)}}
               ],
               { cancelable: false}
             )
-          }
-          else
-          {
-            await AsyncStorage.setItem('@pushNotif', itemValue.toString());
-            this.setState({switcher: itemValue});
-            registerForPushNotificationsAsync();
+          } else {
+            this.switchVal(itemValue);
           }
       } catch(error) {
           console.log('error', error);
