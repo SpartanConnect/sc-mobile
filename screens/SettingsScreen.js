@@ -36,7 +36,7 @@ export default class SettingsScreen extends React.Component {
                 </View>
                 <View>
                 <Text style={ AppStyles.settings}>Enable Push Notifications {this.state.switcher}</Text>
-                <Switch style={{marginLeft: 150, paddingBottom: 0, transform: [{scaleX: 1.1}, {scaleY: 1.1}]}} onTintColor="red" thumbTintColor="gainsboro" onValueChange={(itemValue, itemIndex) => this.switchChange(itemValue)} value={this.state.switcher}/>
+                <Switch style={{marginLeft: Dimensions.get('window').width/2 - 18, marginRight: Dimensions.get('window').width/2 - 18, paddingBottom: 0, transform: [{scaleX: 1.1}, {scaleY: 1.1}]}} onTintColor="red" thumbTintColor="gainsboro" onValueChange={(itemValue, itemIndex) => this.switchChange(itemValue)} value={this.state.switcher}/>
                 </View>
             </ScrollView>
         );
