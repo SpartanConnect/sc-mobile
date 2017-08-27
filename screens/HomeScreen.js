@@ -22,7 +22,7 @@ export default class HomeScreen extends React.Component {
             <Image source={require('../assets/images/logoandtext.png')} style={{left: 0, width: 310, height: 80, padding: 0, margin: 0}}/>,
         headerRight:
             <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
-                <Image source={require('../assets/images/settings.png')} style={{left: 0, marginRight: 10, width: 30, height: 30, padding: 0, margin: 0}} />
+                <Image source={require('../assets/images/settings.png')} style={{left: 0, marginRight: 10, width: 30, marginBottom: 40, height: 30, padding: 0, margin: 0}} />
             </TouchableOpacity>
     });
 
@@ -64,6 +64,10 @@ export default class HomeScreen extends React.Component {
             } else {
                 await AsyncStorage.setItem('@GradeLevel', 'all');
                 this.setState({settings: 'all'});
+            }
+            let pushtemp = await AsyncStorage.getItem('@pushNotif');
+            if(pushtemp == null) {
+                await AsyncStorage.setItem('@pushNotif', "true");
             }
         } catch (error) {
             await AsyncStorage.setItem('@GradeLevel', 'all');

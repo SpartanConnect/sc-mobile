@@ -7,7 +7,8 @@ import { AppStyles, AppTextStyles } from '../components/Styles';
 export default class AnnouncementView extends React.Component {
     static navigationOptions = ({ navigation }) => {
         const { state } = navigation;
-        return { title: state.params.data.title }
+        return { headerRight:
+            <Image source={require('../assets/images/text.png')} style={{left: 0, width: 222, height: 80, padding: 0, marginRight: 58, margin: 0}}/>,}
     };
 
   constructor(props) {
@@ -41,7 +42,7 @@ export default class AnnouncementView extends React.Component {
                     <Text selectable={true} style={AppTextStyles.heading}>{this.props.navigation.state.params.data.title}</Text>
                     <Text selectable={true} style={AppStyles.announcementDescription}>Posted by {this.props.navigation.state.params.data.creator.name}</Text>
                     <Text selectable={true} style={AppStyles.announcementCoreText}>{this.props.navigation.state.params.data.description}</Text>
-                    <Text selectable={true} style={AppStyles.announcementDescription}>{this.props.navigation.state.params.data.tags.map(tag => {return "#"+tag.name + " ";})}</Text>
+                    <Text style={AppStyles.announcementDescription}>{this.props.navigation.state.params.data.tags.map(tag => {return "#"+tag.name + " ";})}</Text>
                 </ScrollView>
             </View>
         );

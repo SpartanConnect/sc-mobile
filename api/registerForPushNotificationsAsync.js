@@ -1,4 +1,5 @@
 import { Permissions, Notifications } from 'expo';
+import { AsyncStorage } from 'react-native';
 import { API_CALL } from '../constants/APICalls';
 
 // Example server, implemented in Rails: https://git.io/vKHKv
@@ -21,6 +22,8 @@ export default (async function registerForPushNotificationsAsync() {
     return;
   }
 
+  let pushNotif = await AsyncStorage.getItem('@pushNotif');
+
   // Get the token that uniquely identifies this device
   let token = await Notifications.getExpoPushTokenAsync();
 
@@ -32,7 +35,10 @@ export default (async function registerForPushNotificationsAsync() {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      token: token
+      token: {
+        value: token,
+        enableNotifs: pushNotif
+      }
     }),
   });
 });

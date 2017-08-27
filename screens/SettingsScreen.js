@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Text, Picker, AsyncStorage, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, Picker, AsyncStorage, View, Switch } from 'react-native';
 import { ExpoConfigView } from '@expo/samples';
 
 import { AppStyles, AppTextStyles } from '../components/Styles';
@@ -12,7 +12,8 @@ export default class SettingsScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            pickerValue: null
+            pickerValue: null,
+            switcher: null,
         };
         this.getValue();
     }
@@ -20,7 +21,7 @@ export default class SettingsScreen extends React.Component {
     render() {
         return (
             <ScrollView style={ styles.container }>
-                <Text style={ AppStyles.settings }>Select a grade to filter by.</Text>
+                <Text style={ AppStyles.settings }>Select a Grade to Filter By</Text>
                 <View style={ AppStyles.settingsView }>
                     <Picker selectedValue={ this.state.pickerValue } onValueChange={(itemValue, itemIndex) => this.valueChange(itemValue)}>
                         <Picker.Item label="All" value="all" />
@@ -32,25 +33,38 @@ export default class SettingsScreen extends React.Component {
                         <Picker.Item label="12th" value="grade12" />
                     </Picker>
                 </View>
-                <Text style={ AppStyles.helperText }>(We are working on allowing you to select multiple grades!)</Text>
+                <View>
+                <Text style={ AppStyles.settings}>Enable Push Notifications</Text>
+                <Switch style={{marginLeft: 150, marginRight: 150}} onTintColor="red" onValueChange={(itemValue, itemIndex) => this.switchChange(itemValue)} value={this.state.switcher}/>
+                </View>
             </ScrollView>
         );
     }
 
+    async switchChange(itemValue, itemIndex){
+      try {
+          await AsyncStorage.setItem('@pushNotif', itemValue.toString());
+          this.setState({switcher: itemValue});
+      } catch(error) {
+          console.log('error', error);
+      }
+    }
+
     async valueChange(itemValue, itemIndex){
-        try {
-            await AsyncStorage.setItem('@GradeLevel', itemValue);
-            let currentValue = await AsyncStorage.getItem('@GradeLevel');
-            this.setState({pickerValue: currentValue});
-        } catch(error) {
-            console.log('error', error);
-        }
+      try {
+          await AsyncStorage.setItem('@GradeLevel', itemValue);
+          this.setState({pickerValue: itemValue});
+      } catch(error) {
+          console.log('error', error);
+      }
     }
 
     async getValue() {
         try {
-            let currentValue = await AsyncStorage.getItem('@GradeLevel');
-            this.setState({pickerValue: currentValue});
+            let currentGradeValue = await AsyncStorage.getItem('@GradeLevel');
+            this.setState({pickerValue: currentGradeValue});
+            let currentSwitcherValue = await AsyncStorage.getItem('@pushNotif');
+            this.setState({switcher: (currentSwitcherValue == "true")});
         } catch(error) {
             console.log('error', error);
         }

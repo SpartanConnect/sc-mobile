@@ -105,7 +105,8 @@ export const AppStyles = StyleSheet.create({
     marginTop: 10,
     fontSize: 24,
     fontWeight: "400",
-    paddingLeft: 20,
+    paddingTop: 5,
+    textAlign: 'center',
   },
   settingsView: {
     paddingLeft: 20,
@@ -118,7 +119,7 @@ export const AppStyles = StyleSheet.create({
   },
   helperText: {
     paddingLeft: 20,
-    marginTop: 5  
+    marginTop: 5
   },
   date: {
     marginTop: 60,
