@@ -19,11 +19,17 @@ export default (async function registerForPushNotificationsAsync() {
 
   // Stop here if the user did not grant permissions
   if (finalStatus !== 'granted') {
+    await AsyncStorage.setItem('@pushNotif', 'false');
     return;
   }
 
-  let pushNotif = (await AsyncStorage.getItem('@pushNotif') == "true");
+  if (await AsyncStorage.getItem('@pushNotif') !== 'false' && await AsyncStorage.getItem('@pushNotif') !== 'true') {
+    // By default, enable push notifications.
+    await AsyncStorage.setItem('@pushNotif', 'true');
+  }
 
+  let pushNotif = (await AsyncStorage.getItem('@pushNotif') == "true");
+  
   // Get the token that uniquely identifies this device
   let token = await Notifications.getExpoPushTokenAsync();
 
