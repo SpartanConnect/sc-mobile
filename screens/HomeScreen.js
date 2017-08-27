@@ -65,10 +65,6 @@ export default class HomeScreen extends React.Component {
                 await AsyncStorage.setItem('@GradeLevel', 'all');
                 this.setState({settings: 'all'});
             }
-            let pushtemp = await AsyncStorage.getItem('@pushNotif');
-            if(pushtemp == null) {
-                await AsyncStorage.setItem('@pushNotif', "true");
-            }
         } catch (error) {
             await AsyncStorage.setItem('@GradeLevel', 'all');
             this.setState({settings: 'all'});

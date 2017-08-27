@@ -34,8 +34,8 @@ export default class SettingsScreen extends React.Component {
                     </Picker>
                 </View>
                 <View>
-                <Text style={ AppStyles.settings}>Enable Push Notifications</Text>
-                <Switch style={{marginLeft: 150, marginRight: 150}} onTintColor="red" onValueChange={(itemValue, itemIndex) => this.switchChange(itemValue)} value={this.state.switcher}/>
+                <Text style={ AppStyles.settings}>Enable Push Notifications {this.state.switcher}</Text>
+                <Switch style={{marginLeft: 150, paddingBottom: 50, marginRight: 150, transform: [{scaleX: 1.4}, {scaleY: 1.4}]}} onTintColor="red" thumbTintColor="white" onValueChange={(itemValue, itemIndex) => this.switchChange(itemValue)} value={this.state.switcher}/>
                 </View>
             </ScrollView>
         );
@@ -61,10 +61,10 @@ export default class SettingsScreen extends React.Component {
 
     async getValue() {
         try {
+            let currentSwitcherValue = (await AsyncStorage.getItem('@pushNotif') == "true");
+            this.setState({switcher: currentSwitcherValue});
             let currentGradeValue = await AsyncStorage.getItem('@GradeLevel');
             this.setState({pickerValue: currentGradeValue});
-            let currentSwitcherValue = await AsyncStorage.getItem('@pushNotif');
-            this.setState({switcher: (currentSwitcherValue == "true")});
         } catch(error) {
             console.log('error', error);
         }

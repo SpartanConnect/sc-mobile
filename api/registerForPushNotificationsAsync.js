@@ -22,7 +22,7 @@ export default (async function registerForPushNotificationsAsync() {
     return;
   }
 
-  let pushNotif = await AsyncStorage.getItem('@pushNotif');
+  let pushNotif = (await AsyncStorage.getItem('@pushNotif') == "true");
 
   // Get the token that uniquely identifies this device
   let token = await Notifications.getExpoPushTokenAsync();
