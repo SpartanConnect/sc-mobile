@@ -3,6 +3,7 @@ import { ScrollView, StyleSheet, Text, Picker, AsyncStorage, View, Switch } from
 import { ExpoConfigView } from '@expo/samples';
 
 import { AppStyles, AppTextStyles } from '../components/Styles';
+import registerForPushNotificationsAsync from './api/registerForPushNotificationsAsync';
 
 export default class SettingsScreen extends React.Component {
     static navigationOptions = ({ navigation }) => ({
@@ -45,6 +46,7 @@ export default class SettingsScreen extends React.Component {
       try {
           await AsyncStorage.setItem('@pushNotif', itemValue.toString());
           this.setState({switcher: itemValue});
+          registerForPushNotificationsAsync();
       } catch(error) {
           console.log('error', error);
       }
