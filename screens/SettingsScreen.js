@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Text, Picker, AsyncStorage, View, Switch, Alert} from 'react-native';
+import { ScrollView, StyleSheet, Text, Picker, AsyncStorage, View, Switch, Alert, Dimensions } from 'react-native';
 import { ExpoConfigView } from '@expo/samples';
 
 import { AppStyles, AppTextStyles } from '../components/Styles';
@@ -36,7 +36,7 @@ export default class SettingsScreen extends React.Component {
                 </View>
                 <View>
                 <Text style={ AppStyles.settings}>Enable Push Notifications {this.state.switcher}</Text>
-                <Switch style={{marginLeft: 150, paddingBottom: 50, marginRight: 150, transform: [{scaleX: 1.4}, {scaleY: 1.4}]}} onTintColor="red" thumbTintColor="white" onValueChange={(itemValue, itemIndex) => this.switchChange(itemValue)} value={this.state.switcher}/>
+                <Switch style={{marginLeft: 150, paddingBottom: 0, transform: [{scaleX: 1.1}, {scaleY: 1.1}]}} onTintColor="red" thumbTintColor="gainsboro" onValueChange={(itemValue, itemIndex) => this.switchChange(itemValue)} value={this.state.switcher}/>
                 </View>
             </ScrollView>
         );
