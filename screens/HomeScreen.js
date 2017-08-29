@@ -22,7 +22,7 @@ export default class HomeScreen extends React.Component {
             <Image source={require('../assets/images/logoandtext.png')} style={{left: 0, width: 310, height: 80, padding: 0, margin: 0}}/>,
         headerRight:
             <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
-                <Image source={require('../assets/images/settings.png')} style={{left: 0, marginRight: 5, width: 30, marginBottom: 45, height: 30, padding: 0, margin: 0}} />
+                <Image source={require('../assets/images/settings.png')} style={{left: 0, marginRight: 10, width: 30, marginBottom: 0, height: 30, padding: 0, margin: 0}} />
             </TouchableOpacity>
     });
 
