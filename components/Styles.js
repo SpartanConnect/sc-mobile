@@ -19,7 +19,7 @@ export const AppStyles = StyleSheet.create({
     margin: 0,
     marginTop: 2,
     marginBottom: 0,
-    padding: 20,
+    padding: 15,
     borderBottomWidth: 1,
     borderBottomColor: '#bfbfbf'
   },
@@ -30,10 +30,6 @@ export const AppStyles = StyleSheet.create({
   },
   announcementCoreText:
   {
-    marginTop: 10,
-    marginBottom: 5,
-    fontSize: 18,
-    lineHeight: 30,
   },
   pageTitle:
   {
@@ -46,8 +42,8 @@ export const AppStyles = StyleSheet.create({
   {
     fontSize: 35,
     fontWeight: "800",
-    paddingTop: 10,
-    paddingBottom: 10,
+    paddingTop: 7,
+    paddingBottom: 7,
     paddingLeft: 10,
     color: '#fff',
     backgroundColor: '#ff3f49'
@@ -56,8 +52,8 @@ export const AppStyles = StyleSheet.create({
   {
     fontSize: 35,
     fontWeight: "800",
-    paddingTop: 10,
-    paddingBottom: 10,
+    paddingTop: 7,
+    paddingBottom: 7,
     paddingLeft: 10,
     color: '#fff',
     backgroundColor: '#38c5fc'
@@ -66,8 +62,8 @@ export const AppStyles = StyleSheet.create({
   {
     fontSize: 35,
     fontWeight: "800",
-    paddingTop: 10,
-    paddingBottom: 10,
+    paddingTop: 7,
+    paddingBottom: 7,
     paddingLeft: 10,
     color: '#fff',
     backgroundColor: '#09db03'
@@ -76,8 +72,8 @@ export const AppStyles = StyleSheet.create({
   {
     fontSize: 35,
     fontWeight: "800",
-    paddingTop: 10,
-    paddingBottom: 10,
+    paddingTop: 7,
+    paddingBottom: 7,
     paddingLeft: 10,
     color: '#fff',
     backgroundColor: '#fca71f' ,
@@ -86,8 +82,8 @@ export const AppStyles = StyleSheet.create({
   {
     fontSize: 35,
     fontWeight: "800",
-    paddingTop: 10,
-    paddingBottom: 10,
+    paddingTop: 7,
+    paddingBottom: 7,
     paddingLeft: 10,
     color: '#fff',
     backgroundColor: '#939393',
@@ -95,8 +91,8 @@ export const AppStyles = StyleSheet.create({
   academics: {
     fontSize: 35,
     fontWeight: "800",
-    paddingTop: 10,
-    paddingBottom: 10,
+    paddingTop: 7,
+    paddingBottom: 7,
     paddingLeft: 10,
     color: '#fff',
     backgroundColor: '#941ffc',

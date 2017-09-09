@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Alert, Button, FlatList, ScrollView, StatusBar, StyleSheet, Text, View, WebView, Image } from 'react-native';
+import { Alert, Button, Dimensions, FlatList, ScrollView, StatusBar, StyleSheet, Text, View, WebView, Image } from 'react-native';
 import HTMLView from 'react-native-htmlview';
 
 import { AppStyles, AppTextStyles } from '../components/Styles';
@@ -8,7 +8,7 @@ export default class AnnouncementView extends React.Component {
     static navigationOptions = ({ navigation }) => {
         const { state } = navigation;
         return { headerRight:
-            <Image source={require('../assets/images/text.png')} style={{left: 0, width: 222, height: 80, padding: 0, marginRight: 58, margin: 0}}/>,}
+            <Image source={require('../assets/images/text.png')} style={{left: 0, width: Dimensions.get('window').width/360*222, height: Dimensions.get('window').width/360*80, padding: 0, marginRight: Dimensions.get('window').width/360*50, margin: 0}}/>,}
     };
 
   constructor(props) {
@@ -35,13 +35,20 @@ export default class AnnouncementView extends React.Component {
     }
   }
 
+
+  parser(oldValue)
+  {
+    let urlParser = /(ht|f)tp(s?):\/{2}(www\.)?([a-z0-9-]+\.)?([a-z0-9-]+\.)?([a-z]{2,4})([a-zA-Z0-9\.\/?&=_#-]*)/g;
+    return oldValue.replace(urlParser, `<a href="$&">$&</a>`);
+  }
+
     render() {
         return (
             <View style={AppStyles.announcement}>
                 <ScrollView>
                     <Text selectable={true} style={AppTextStyles.heading}>{this.props.navigation.state.params.data.title}</Text>
                     <Text selectable={true} style={AppStyles.announcementDescription}>Posted by {this.props.navigation.state.params.data.creator.name}</Text>
-                    <Text selectable={true} style={AppStyles.announcementCoreText}>{this.props.navigation.state.params.data.description}</Text>
+                    <HTMLView selectable={true} style={AppStyles.announcementCoreText} value={this.parser(this.props.navigation.state.params.data.description)}/>
                     <Text style={AppStyles.announcementDescription}>{this.props.navigation.state.params.data.tags.map(tag => {return "#"+tag.name + " ";})}</Text>
                 </ScrollView>
             </View>

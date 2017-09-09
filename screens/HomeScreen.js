@@ -5,7 +5,7 @@ This file contains the actual screen component used to display the announcement.
 */
 
 import React, { Component } from 'react';
-import { Image, TouchableOpacity, Alert, AsyncStorage, Button, FlatList, RefreshControl, ScrollView, StyleSheet, StatusBar, Text, View, WebView, TouchableHighlight, I18nManager, Switch, TextInput, DrawerLayoutAndroid, DrawerConsts} from 'react-native';
+import { Image, TouchableOpacity, Platform, Alert, AsyncStorage, Dimensions, Button, FlatList, RefreshControl, ScrollView, StyleSheet, StatusBar, Text, View, WebView, TouchableHighlight, I18nManager, Switch, TextInput, DrawerLayoutAndroid, DrawerConsts} from 'react-native';
 import HTMLView from 'react-native-htmlview';
 
 import { AppStyles, AppTextStyles } from '../components/Styles';
@@ -19,10 +19,10 @@ The screen that holds the announcements.
 export default class HomeScreen extends React.Component {
     static navigationOptions = ({ navigation }) => ({
         headerLeft:
-            <Image source={require('../assets/images/logoandtext.png')} style={{left: 0, width: 310, height: 80, padding: 0, margin: 0}}/>,
+            <Image source={require('../assets/images/logoandtext.png')} style={{left: 0, width: Dimensions.get('window').width/360*310, height: Dimensions.get('window').width/360*80, padding: 0, margin: 0}}/>,
         headerRight:
             <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
-                <Image source={require('../assets/images/settings.png')} style={{left: 0, marginRight: 5, width: 30, marginBottom: 45, height: 30, padding: 0, margin: 0}} />
+                <Image source={require('../assets/images/settings.png')} style={{left: 0, marginRight: Dimensions.get('window').width/360*15, width: Dimensions.get('window').width/360*30, marginBottom: 0, height: Dimensions.get('window').width/360*30, padding: 0, margin: 0}} />
             </TouchableOpacity>
     });
 
@@ -253,7 +253,7 @@ export default class HomeScreen extends React.Component {
               <FlatList data={this.state.categoryAnnouncements.clubs} renderItem={({item}) => <Announcement settings={this.state.settings} id={item.value.id} data={item.value} returnFunction={this._onRedirect.bind(this)} />}/>
             </View>)}
 
-           {this.conditionalRender(this.state.categoryAnnouncements.sports.length!=0  && (this.state.settings == 'all' || this.state.categoryAnnouncements.sports.map( announcement => {
+           {this.conditionalRender(this.state.categoryAnnouncements.sports.length!=0 && (this.state.settings == 'all' || this.state.categoryAnnouncements.sports.map( announcement => {
              value = announcement.value.tags.map((tag) => {
                return tag.slug;
              });

@@ -1,6 +1,6 @@
 import React from 'react';
 import { StackNavigator, NavigationActions } from 'react-navigation';
-import { Image, Text, TouchableOpacity, Platform } from 'react-native';
+import { Image, Text, TouchableOpacity, Platform, Dimensions } from 'react-native';
 
 import { AppStyles, AppTextStyles } from '../components/Styles';
 import HomeScreen from '../screens/HomeScreen';
@@ -27,7 +27,7 @@ const RootStackNavigator = StackNavigator({
             color: '#a6192e'
         },
         headerStyle: {
-            height: (Platform.OS === 'ios') ? 100 : 80,
+            height: (Platform.OS === 'ios') ? Dimensions.get('window').width/360*100 : Dimensions.get('window').width/360*80,
             backgroundColor: '#ffffff',
             shadowColor: '#8c8b8a',
             shadowOffset: {height:2},
