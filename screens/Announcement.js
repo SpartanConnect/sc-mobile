@@ -39,7 +39,9 @@ export default class AnnouncementView extends React.Component {
   parser(oldValue)
   {
     let urlParser = /(ht|f)tp(s?):\/{2}(www\.)?([a-z0-9-]+\.)?([a-z0-9-]+\.)?([a-z]{2,4})([a-zA-Z0-9\.\/?&=_#-]*)/g;
-    return oldValue.replace(urlParser, `<a href="$&">$&</a>`);
+    let emailParser = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g;
+    let links = oldValue.replace(urlParser, `<a href="$&">$&</a>`);
+    return links.replace(emailParser, `<a href="mailto:$&">$&</a>`)
   }
 
     render() {
